@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block title %}Посты{% endblock %}
+{% block  content %}
+    <div class="select2-container"></div>
+        <h1>Посты</h1>
+        <div class="payload">
+            <ul>
+                {% for post in posts %}
+                    <div class="list-group">
+                          <a href="/" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">{{post.title}}</h5>
+                            </div>
+                            <p class="mb-1">{{post.description}}</p>
+                          </a>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+{% endblock %}
