@@ -9,3 +9,6 @@ make-migrate:
 migrate:
 	python manage.py migrate
 
+lint:
+	flake8 .
+
