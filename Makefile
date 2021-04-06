@@ -2,7 +2,7 @@ run:
 	python manage.py runserver
 
 
-make-migrate:
+make-migration:
 	python manage.py makemigrations
 
 

@@ -1,7 +1,7 @@
 """File creating PostForm from ModelForm."""
-from django.forms import ModelForm, Textarea, TextInput
+from django.forms import ModelForm, Textarea, TextInput, Select
 
-from .models import Post
+from .models import Post, Subscriber
 
 
 class PostForm(ModelForm):
@@ -26,3 +26,26 @@ class PostForm(ModelForm):
                 "placeholder": "Содержимое"
             })
         }
+
+class SubscriberForm(ModelForm):
+    """Set PostForm from ModelForm."""
+
+    class Meta:
+        """Meta class to sets fields and widgets to Form."""
+
+        model = Subscriber
+        fields = ['email_to', 'author_id']
+        widgets = {
+            "email_to": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Email подписчика "
+            }),
+            "author_id": Select(attrs={
+                "class": "form-control",
+                "placeholder": "Автор ID"
+            }),
+
+            }
+
+
+

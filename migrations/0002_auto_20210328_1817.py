@@ -12,10 +12,14 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelTable(
             name='post',
-            table='  tb_posts',
+            table='tb_posts',
         ),
         migrations.AlterModelTable(
             name='user',
             table='tb_users',
+        ),
+        migrations.AlterModelTable(
+            name='subscriber',
+            table='tb_subscribers',
         ),
     ]
