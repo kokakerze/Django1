@@ -1,10 +1,11 @@
+"""Subscribers service."""
 from django.core.exceptions import ObjectDoesNotExist
-
-from main.models import Subscriber
 from main.models import Author
+from main.models import Subscriber
 
 
 def subscribe(author_id, email_to):
+    """Subscribe on author if not existing in Database."""
     try:
         # todo get email of Subscriber
         Subscriber.objects.get(email_to=email_to, author_id=int(author_id))

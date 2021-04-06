@@ -1,5 +1,5 @@
 """File creating PostForm from ModelForm."""
-from django.forms import ModelForm, Textarea, TextInput, Select
+from django.forms import ModelForm, Select, Textarea, TextInput
 
 from .models import Post, Subscriber
 
@@ -27,6 +27,7 @@ class PostForm(ModelForm):
             })
         }
 
+
 class SubscriberForm(ModelForm):
     """Set PostForm from ModelForm."""
 
@@ -45,7 +46,4 @@ class SubscriberForm(ModelForm):
                 "placeholder": "Автор ID"
             }),
 
-            }
-
-
-
+        }

@@ -1,6 +1,6 @@
 """ViewsFile that manages information that shows in urls."""
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from main.forms import PostForm, SubscriberForm
 from main.models import Author
 from main.services.notify_service import notify
@@ -57,6 +57,7 @@ def api_subscribe(request):
 
 
 def posts_subscribe(request):
+    """Subscribe on Post bi ID authors."""
     # Получить автора
     # Подписаться под автором
     errors = ''
@@ -79,6 +80,7 @@ def posts_subscribe(request):
 
 
 def subscribe_notify(author_id, email_to):
+    """Subscribe and notifing process."""
     if subscribe(author_id, email_to):
         notify(email_to)
         return True

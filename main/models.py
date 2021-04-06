@@ -28,6 +28,7 @@ class Subscriber(models.Model):
 
     class Meta:
         """Special class to define database and name's printing in admin."""
+
         db_table = "tb_subscribers"
         verbose_name_plural = "Подписчики"
         verbose_name = "Подписчик"
