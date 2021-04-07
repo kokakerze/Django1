@@ -1,7 +1,10 @@
+"""File registering models."""
 from django.contrib import admin
+from main.models import Author, Post, Subscriber
 
 # Register your models here.
-from main.models import Post, User
 
-admin.site.register(User)
+
+admin.site.register(Author)
 admin.site.register(Post)
+admin.site.register(Subscriber)

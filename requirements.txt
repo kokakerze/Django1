@@ -1,4 +1,14 @@
 asgiref==3.3.1
 Django==3.1.7
+flake8==3.9.0
+flake8-builtins==1.5.3
+flake8-docstrings==1.6.0
+flake8-import-order==0.18.1
+flake8-quotes==3.2.0
+mccabe==0.6.1
+pycodestyle==2.7.0
+pydocstyle==6.0.0
+pyflakes==2.3.1
 pytz==2021.1
+snowballstemmer==2.1.0
 sqlparse==0.4.1

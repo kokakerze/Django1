@@ -2,10 +2,13 @@ run:
 	python manage.py runserver
 
 
-make-migrate:
+make-migration:
 	python manage.py makemigrations
 
 
 migrate:
 	python manage.py migrate
+
+lint:
+	flake8 .
 
