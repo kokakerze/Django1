@@ -11,4 +11,3 @@ migrate:
 
 lint:
 	flake8 .
-
