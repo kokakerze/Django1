@@ -11,13 +11,15 @@
 <body>
 
 <nav class="nav d-flex justify-content-between">
-      <a class="p-2 link-secondary" href="{% url "homepage" %}">Homepage</a>
-      <a class="p-2 link-secondary" href="{% url "about" %}">About</a>
-      <a class="p-2 link-secondary" href="{% url "posts" %}">Posts</a>
-      <a class="p-2 link-secondary" href="{% url "post_create" %}">Create Post</a>
-      <a class="p-2 link-secondary" href="{% url "api_posts" %}">API</a>
-      <a class="p-2 link-secondary" href="{% url "posts_subscribe" %}">Подписаться</a>
-{#      <a class="p-2 link-secondary" href="#">Politics</a>#}
+      <a class="p-2 link-secondary" href="{% url "homepage" %}">Главная</a>
+      <a class="p-2 link-secondary" href="{% url "about" %}">О нас</a>
+      <a class="p-2 link-secondary" href="{% url "posts_all" %}">Посты</a>
+      <a class="p-2 link-secondary" href="{% url "post_create" %}">Создать Пост</a>
+      <a class="p-2 link-secondary" href="{% url "subscribers_new" %}">Подписаться на автора</a>
+      <a class="p-2 link-secondary" href="{% url "authors_new" %}">Сгенерировать автора</a>
+      <a class="p-2 link-secondary" href="{% url "authors_all" %}">Все авторы</a>
+
+    <a class="p-2 link-secondary" href="{% url "api_posts" %}">API</a>
 {#      <a class="p-2 link-secondary" href="#">Opinion</a>#}
 {#      <a class="p-2 link-secondary" href="#">Science</a>#}
 {#      <a class="p-2 link-secondary" href="#">Health</a>#}

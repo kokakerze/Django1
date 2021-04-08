@@ -6,21 +6,28 @@
 {% block  content %}
 
     <div class="select2-container"></div>
-        <h1>Посты</h1>
+        <h1>Обновить пост</h1>
         <div class="error">
-        {{ form.errors }}
-        {{ errors }}
+        <h4 class="error">{{ err }}</h4>
+            <div class="dj_error">
+                {{ form.errors }}
+            </div>
+
+
         </div>
 
         <div class="payload">
-            <form action="{% url "post_create" %}" method="post">
+
+            <form method="post">
                 {% csrf_token %}
-                {{form.title}}
+
+                {{ form.title }}
                 <br>
                 {{ form.description }}
                 <br>
                 {{ form.content }}
                 <br><br>
+
                 <button class="btn btn-success">Сохранить</button>
             </form>
         </div>

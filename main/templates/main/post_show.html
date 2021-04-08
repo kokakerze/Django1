@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block  content %}
+    {% load static %}
+    <div class="select2-container"></div>
+        <h1>{{ title }}</h1>
+        <div class="payload">
+            <ul>
+                <span class="grey summary">{{ pst.description }}</span>
+                    <div class="list-group">
+                          <a href="{%  url "post_update" post_id=pst.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                            {{ pst.content }}
+                          </a>
+                    </div>
+
+            </ul>
+        </div>
+{% endblock %}
