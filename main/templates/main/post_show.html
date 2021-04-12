@@ -10,9 +10,42 @@
                 <span class="grey summary">{{ pst.description }}</span>
                     <div class="list-group">
                           <a href="{%  url "post_update" post_id=pst.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
-                            {{ pst.content }}
-                          </a>
+                            {{ pst.content }}</a>
+                              {% with comments.count as total_comments %}
+                                  <br>
+                                    <h2>
+                                        {{ total_comments }} Коментариев
+                                    </h2>
+                              {% endwith %}
+                              {% for comment in comments %}
+                                <div class="comment">
+                                    <p class="info">
+                                        Комментарий {{ forloop.counter }} от {{ comment.subs_id }}
+                                        {{ comment.created }}
+                                    </p>
+                                    {{ comment.body|linebreaks }}
+                                </div>
+                              {% empty %}
+                                <p>Пока нет комментариев.</p>
+                              {% endfor %}
+                              {% if new_comment %}
+                                <h2>Твой комментарий был добавлен.</h2>
+                              {% else %}
+                                <h2>Добавлен новый комментарий</h2>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    {{comment_form.subs_id}}
+                                    <br>
+                                    {{ comment_form.body  }}
+
+                                    <br><br>
+                                    <button class="btn btn-success">Сохранить</button>
+
+                                </form>
+                              {% endif %}
+
                     </div>
+
 
             </ul>
         </div>

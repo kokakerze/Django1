@@ -1,8 +1,8 @@
 """File creating PostForm from ModelForm."""
 from django import forms
-from django.forms import ModelForm, Textarea, TextInput
+from django.forms import ModelForm, Select, Textarea, TextInput
 
-from .models import Author, Post, Subscriber
+from .models import Author, Comments, Post, Subscriber
 
 
 class PostForm(ModelForm):
@@ -56,5 +56,38 @@ class SubscriberForm(ModelForm):
             #     "class": "form-control",
             #     "placeholder": "Автор ID"
             # }),
+
+        }
+
+    def save(self, commit=True):
+        """Manual save method for Subscriber."""
+        print("Subscriber before save")
+        # form.ModelForm.save(self,commit)
+        sbr = super().save(commit=False)
+        sbr.email_to = sbr.email_to.title() + '[email]'
+        sbr.save()
+        print("Subscriber after save")
+        return sbr
+
+
+class CommentsForm(ModelForm):
+    """Set PostForm from ModelForm."""
+
+    class Meta:
+        """Meta class to sets fields and widgets to Form."""
+
+        model = Comments
+        fields = ['body', 'subs_id']
+        widgets = {
+            "body": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Ваш комментариий"
+            }
+
+            ),
+            "subs_id": Select(attrs={
+                "class": "form-control",
+                "placeholder": "подписчика ID"
+            }),
 
         }
