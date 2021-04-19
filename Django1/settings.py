@@ -13,8 +13,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# from celery.schedules import crontab
+from celery.schedules import crontab
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -26,7 +28,21 @@ SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# Celery configuration
+CELERY_BROKER_URL = 'amqp://localhost'
 
+CELERY_TIMEZONE = "Europe/Kiev"
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BEAT_SCHEDULE = {
+    "delete_logs": {
+        "task": "main.task.delete_logs",
+        "schedule": crontab(minute="0", hour="1")
+    },
+    "mail_send_9am": {
+        "task": "main.task.mail_send_9am",
+        "schedule": crontab(minute="0", hour="9")
+    }
+}
 
 # Application definition
 
@@ -39,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'main',
+    'django_extensions',
 
 ]
 
@@ -51,6 +68,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'main.middleware.SimpleMiddleware',
+    'main.middleware.LogMiddleware',
+    # 'main.middleware.MetricsMiddleware',
 ]
 
 ROOT_URLCONF = 'Django1.urls'
@@ -73,7 +93,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Django1.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -83,7 +102,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -103,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -117,7 +134,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -128,3 +144,11 @@ STATIC_URL = '/static/'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+EMAIL_HOST_USER = "pavlovdesigh@gmail.com"
+EMAIL_HOST_PASSWORD = "pavlov2020"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
