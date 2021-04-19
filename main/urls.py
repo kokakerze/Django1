@@ -8,10 +8,9 @@ from . import views
 
 
 urlpatterns = [
-    # path('', views.index, name="homepage"),
+
     path('', TemplateView.as_view(template_name='main/index.html'), name='homepage'),
     path('about/', views.about, name='about'),
-    # url(r'^favicon\.ico$', RedirectView.as_view(url='/main/static/images/favicon/favicon.ico')),
 
     path('posts/create/', views.post_create, name='post_create'),
     path('posts/update/<int:post_id>/', views.post_update, name='post_update'),

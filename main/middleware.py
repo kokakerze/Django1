@@ -14,12 +14,10 @@ class SimpleMiddleware:
 
     def __call__(self, request):
         """Make a Body of SimpleMiddleware."""
-        print('before')
         # Code to be executed for each request before
         # the view (and later middleware) are called.
         st = time()
         response = self.get_response(request)
-        print('after')
         print(f"Time executed:{time() - st}; path:{request.path}")
         # Code to be executed for each request/response after
         # the view is called.
@@ -50,7 +48,6 @@ class LogMiddleware:
         logger.save()
         response = self.get_response(request)
         if request.method == "GET":
-            print("lets go!")
             st = time()
             path = request.get_full_path()
             user_ip = get_client_ip(request)
@@ -59,5 +56,4 @@ class LogMiddleware:
             logger = Logger(utm=str(utm), time_execution=time_ex, user_ip=user_ip, path=path)
             logger.save()
 
-        print("WTF! already done!")
         return response

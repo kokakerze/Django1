@@ -10,8 +10,8 @@ def author_pre_save(sender, instance, **kwargs):
     """Signal post saving in Author."""
     print('-----------pre_save')
     # breakpoint()
-    instance.name = instance.name.lower() + "[name author7]"
-    instance.email = instance.email + "[email author8]"
+    instance.name = instance.name.lower()
+    instance.email = instance.email
 
 
 @receiver(post_save, sender=Author)
