@@ -18,7 +18,7 @@ def index(request):
 
 
 def about(request):
-    """Show about page."""
+    """Show about best page."""
     return render(request, "main/about.html", {"title": "About Company"})
 
 
