@@ -1,15 +1,12 @@
 """ViewsFile that manages information that shows in urls."""
-
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Post, Subscriber
 from main.services.notify_service import notify
-from main.services.post_service import comment_method, post_find, postall
+from main.services.post_service import post_find, postall
 from main.services.subscribe_service import subscribe
-from main.tasks import notify_async
-from prompt_toolkit.validation import ValidationError
 
 
 def index(request):
@@ -45,41 +42,37 @@ def post_create(request):
 
 def subscribers_new(request):
     """Subscribe on Post bi ID authors."""
+    # Получить автора
+    # Подписаться под автором
     errors = ''
-    subscribe_success = False
-
     if request.method == "POST":
         form = SubscriberForm(request.POST)
-        try:
-            if form.is_valid():
-                form.save()
-                subscribe_success = True
-            else:
-                errors = form.errors
-        except ValidationError:
-            errors = "Already subscribed."
+        if form.is_valid():
+            form.save()
+            return redirect("subscribers_all")
+            # author_id = request.POST['author_id']
+            # email_to = request.POST['email_to']
+            # subscribe_success = subscribe_notify(author_id, email_to)
+            # if subscribe_success:
+            #     return redirect("posts")
+            # else:
+            #     errors = "Вы уже подписаны на этого автора."
+        else:
+            errors = form.errors
     else:
         form = SubscriberForm()
-    if subscribe_success:
-        delayed_notify(request)
-        return redirect("subscribers_all")
-
     context = {"form": form, "errors": errors}
     return render(request, "main/subscribers_new.html", context=context)
 
 
-def delayed_notify(request):
-    """Notifies subscribers in delayed tasks."""
-    email_to = request.POST.get('email_to')
-    author_id = request.POST.get('author_id')
-    author = Author.objects.get(id=author_id)
-    notify_async.delay(email_to, author.name)
-
-
-def subscribe_notify(author_id, email_to, authors_name):
-    """Subscribe and notifying process."""
+def subscribe_notify(author_id, email_to):
+    """Subscribe and notifing process."""
+    # if subscribe(author_id, email_to):
+    #     notify(email_to)
+    #     return True
+    # return False
     subscribe(author_id, email_to)
-    notify(email_to, authors_name)
+    notify(email_to)
 
 
 def subscribers_all(request):
@@ -123,11 +116,9 @@ def post_update(request, post_id):
 
 
 def post_show(request, post_id):
-    """Show post by ID+ comments."""
+    """Show post by ID."""
     pst = post_find(post_id)
-    comment_form, comments = comment_method(pst, request)
-    return render(request, "main/post_show.html",
-                  {"title": pst.title, "pst": pst, "comments": comments, "comment_form": comment_form})
+    return render(request, "main/post_show.html", {"title": pst.title, "pst": pst})
 
 
 def api_authors_new(request):
@@ -146,11 +137,10 @@ def api_posts(request):
 
 
 def api_subscribe(request):
-    """Show subscribers of authors."""
-    author_id = request.POST.get('author_id')
-    author = Author.objects.get(id=author_id)
+    """Show subcribers of authors."""
+    author_id = request.GET["author_id"]
     email_to = request.GET["email_to "]
     get_object_or_404(Author, pk=author_id)
-    subscribe_notify(authors_name=author.name, email_to=email_to, author_id=author_id)
+    subscribe_notify(author_id, email_to)
     data = {"author_id": author_id}
     return JsonResponse(data, safe=False)

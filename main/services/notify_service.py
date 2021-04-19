@@ -2,30 +2,21 @@
 from django.http import request
 
 
-def notify(email_to, author_name):
+def notify(email_to):
     """Notifying."""
-    print("----- notify: {}".format(email_to))
-    email_send(email_to, author_name)
+    email_send(email_to)
     # telegram_notify(email_to)
 
 
-def email_send(email_to, author_name):
+def email_send(email_to):
     """Try write services."""
-    from django.core.mail import send_mail
-
-    send_mail(
-        "DesignBlog",
-        "You have subscribed on Author: {}".format(author_name),
-        "pavlovdesigh@gmail.com",
-        [email_to],
-        fail_silently=False
-    )
+    pass
 
 
 def telegram_notify(email_to):
     """Telegram notification."""
     Telegram()
-    Telegram.notify(msg="Welcome")
+    Telegram.notify("Welcome")
 
 
 class Telegram:
@@ -35,5 +26,5 @@ class Telegram:
         """Params for notification."""
         telegram_url = 'https://api.telegram.org/bot<Token>'
         params = {"chat_id": "blablabla", "text": msg}
-        response = request.POST(telegram_url + "sendMessage", data=params)
+        response = request.post(telegram_url + "sendMessage", data=params)
         return response
