@@ -3,9 +3,6 @@ from django.db import models
 from django.utils.timezone import now
 
 
-# Create your models here.
-
-
 class Author(models.Model):
     """Create models of Users."""
 

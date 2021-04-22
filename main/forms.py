@@ -64,7 +64,7 @@ class SubscriberForm(ModelForm):
         print("Subscriber before save")
         # form.ModelForm.save(self,commit)
         sbr = super().save(commit=False)
-        sbr.email_to = sbr.email_to.title() + '[email]'
+        sbr.email_to = sbr.email_to.title()
         sbr.save()
         print("Subscriber after save")
         return sbr
