@@ -1,0 +1,51 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block  content %}
+    <div class="container"></div>
+        <h1>{{ title }}</h1>
+        <div class="payload">
+        <table class="table table-hover" >
+
+            <thead>
+            <tr>
+                <th scope="col"><span style="color: #FFFFFF; ">ID книги</span></th>
+                <th scope="col"><span style="color: #FFFFFF; ">Название</th>
+                <th scope="col"><span style="color: #FFFFFF; ">Автор</th>
+                <th scope="col"><span style="color: #FFFFFF; ">Категория</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+            <tr>
+                <th scope="row"><span style="color: #FFFFFF; ">{{ book.id }}</span></th>
+                <th scope="row"><span style="color: #FFFFFF; ">{{ book.title}}</span></th>
+                <th scope="row"><span style="color: #FFFFFF; ">{{ book.author.name }}</span></th>
+                <th scope="row"><span style="color: #FFFFFF; ">{{ book.category.category }}</span></th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+{#            <ul>#}
+{#                {% for subscriber in subscribers_all %}#}
+{#                    <div class="row">#}
+{#                        <span class="grey">Email подписки:  {{ subscriber.email_to }} </span>#}
+{#                        <span class="grey">Автор:  {{ subscriber.author_id }}</span>#}
+{#                    </div>#}
+{#                <hr>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#            <form action="{% url "post_create" %}" method="post">#}
+{#                {% csrf_token %}#}
+{#                {{form.title}}#}
+{#                <br>#}
+{#                {{ form.description }}#}
+{#                <br>#}
+{#                {{ form.content }}#}
+{#                <br><br>#}
+{#                <button class="btn btn-success">Сохранить</button>#}
+{#            </form>#}
+{#        </div>#}
+    </div>
+{% endblock %}
