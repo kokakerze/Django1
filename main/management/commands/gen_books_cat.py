@@ -1,20 +1,19 @@
 """Generate random Authors and books for them."""
 
-from faker import Faker
 import random
-
-from main.models import Author, Category
-from main.models import Book
 
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
+from faker import Faker
+from main.models import Author, Category
+from main.models import Book
 
 
 class Command(BaseCommand):
     """Generate random data."""
-    help = "generate random data"
 
     def handle(self, *args, **options):
+        """Generate random Author,Book,Categories."""
         Author.objects.all().delete()
         Category.objects.all().delete()
         fake = Faker()

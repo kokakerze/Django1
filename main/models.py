@@ -124,10 +124,14 @@ class Comments(models.Model):
 
 
 class Book(models.Model):
+    """Create a books for authors."""
+
     title = models.CharField("Название книги", max_length=250)
     author = models.ForeignKey("Author", on_delete=models.CASCADE, related_name="books")
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="books_cat")
 
 
 class Category(models.Model):
+    """Set category for books."""
+
     category = models.CharField("Категория книги", max_length=40)

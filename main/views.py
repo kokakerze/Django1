@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
-from main.models import Author, Post, Subscriber, Book, Category
+from main.models import Author, Book, Category, Post, Subscriber
 from main.services.notify_service import notify
 from main.services.post_service import comment_method, post_find, postall
 from main.services.subscribe_service import subscribe
