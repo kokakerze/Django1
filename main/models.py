@@ -16,6 +16,7 @@ class Author(models.Model):
     name = models.CharField("Имя автора", max_length=90)
     last_name = models.CharField("Фамилия автора", max_length=90, blank=True)
     email = models.EmailField("Почта автора", max_length=80)
+    age = models.IntegerField(default=0)
     """Setup name and email fields types and lengths."""
 
     def __str__(self):
@@ -120,3 +121,13 @@ class Comments(models.Model):
     def __str__(self):
         """Set method of printing."""
         return "Comment by {} on {}".format(self.subs_id, self.post)
+
+
+class Book(models.Model):
+    title = models.CharField("Название книги", max_length=250)
+    author = models.ForeignKey("Author", on_delete=models.CASCADE, related_name="books")
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="books_cat")
+
+
+class Category(models.Model):
+    category = models.CharField("Категория книги", max_length=40)
