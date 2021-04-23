@@ -2,9 +2,11 @@
 
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
-from main.models import Author, Book, Category, Post, Subscriber
+from main.models import Author, Book, Category, ContactUs, Post, Subscriber
 from main.services.notify_service import notify
 from main.services.post_service import comment_method, post_find, postall
 from main.services.subscribe_service import subscribe
@@ -24,7 +26,8 @@ def about(request):
 
 def posts_all(request):
     """Show posts page."""
-    return render(request, "main/posts_all.html", {'title': "Posts", "posts": postall()})
+    context = {'title': "Posts", "posts": postall()}
+    return render(request, "main/posts_all.html", context)
 
 
 def post_create(request):
@@ -171,3 +174,18 @@ def api_subscribe(request):
     subscribe_notify(authors_name=author.name, email_to=email_to, author_id=author_id)
     data = {"author_id": author_id}
     return JsonResponse(data, safe=False)
+
+
+class PostsListView(ListView):
+    """Show list of posts analogously."""
+
+    queryset = Post.objects.all()
+    template_name = "main/posts_list.html"
+
+
+class ContactUsView(CreateView):
+    """Create contact us Form as view."""
+
+    success_url = reverse_lazy("homepage")
+    model = ContactUs
+    fields = ("email", "subject", "msg")

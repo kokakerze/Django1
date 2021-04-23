@@ -11,6 +11,7 @@
                     <div class="list-group">
                           <a href="{%  url "post_update" post_id=pst.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                             {{ pst.content }}</a>
+                    <hr>
                               {% with comments.count as total_comments %}
                                   <br>
                                     <h2>

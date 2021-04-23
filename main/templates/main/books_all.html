@@ -2,26 +2,26 @@
 
 {% block title %}{{ title }}{% endblock %}
 {% block  content %}
-    <div class="container"></div>
+    <div class="container" style="color:black;"></div>
         <h1>{{ title }}</h1>
         <div class="payload">
-        <table class="table table-hover" >
+        <table class="table table-hover">
 
             <thead>
             <tr>
-                <th scope="col"><span style="color: #FFFFFF; ">ID книги</span></th>
-                <th scope="col"><span style="color: #FFFFFF; ">Название</th>
-                <th scope="col"><span style="color: #FFFFFF; ">Автор</th>
-                <th scope="col"><span style="color: #FFFFFF; ">Категория</th>
+                <th scope="col"><span style="color: #696969; ">ID книги</span></th>
+                <th scope="col"><span style="color: #000000; ">Название</th>
+                <th scope="col"><span style="color: #696969; ">Автор</th>
+                <th scope="col"><span style="color: #000000; ">Категория</th>
             </tr>
             </thead>
             <tbody>
             {% for book in books %}
             <tr>
-                <th scope="row"><span style="color: #FFFFFF; ">{{ book.id }}</span></th>
-                <th scope="row"><span style="color: #FFFFFF; ">{{ book.title}}</span></th>
-                <th scope="row"><span style="color: #FFFFFF; ">{{ book.author.name }}</span></th>
-                <th scope="row"><span style="color: #FFFFFF; ">{{ book.category.category }}</span></th>
+                <th scope="row"><span style="color: #808080; ">{{ book.id }}</span></th>
+                <th scope="row"><span style="color: #808080; ">{{ book.title}}</span></th>
+                <th scope="row"><span style="color: #808080; ">{{ book.author.name }}</span></th>
+                <th scope="row"><span style="color: #808080; ">{{ book.category.category }}</span></th>
             </tr>
             {% endfor %}
             </tbody>
