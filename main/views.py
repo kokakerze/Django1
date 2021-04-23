@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
-from main.models import Author, Post, Subscriber
+from main.models import Author, Book, Category, Post, Subscriber
 from main.services.notify_service import notify
 from main.services.post_service import comment_method, post_find, postall
 from main.services.subscribe_service import subscribe
@@ -97,8 +97,25 @@ def authors_new(request):
 
 def authors_all(request):
     """Show a list of authors."""
-    allauthors = Author.objects.all()
-    return render(request, "main/authors_all.html", {"title": "Авторы", "authors": allauthors})
+    allauthors = Author.objects.all().prefetch_related("books")
+    context = {"title": "Авторы", "authors": allauthors}
+    return render(request, "main/authors_all.html", context)
+
+
+def books_all(request):
+    """Show a list of authors."""
+    # books = Book.objects.all().select_related("author")
+    books = Book.objects.all().only("id", "title", "author__last_name", "category").select_related("author")
+    context = {"title": "Книги", "books": books}
+    return render(request, "main/books_all.html", context)
+
+
+def category_all(request):
+    """Show a list of authors."""
+    # cat = Category.objects.all()
+    cat = Category.objects.all().prefetch_related("books_cat")
+    context = {"title": "Категории", "categories": cat}
+    return render(request, "main/categories_all.html", context)
 
 
 def post_update(request, post_id):
