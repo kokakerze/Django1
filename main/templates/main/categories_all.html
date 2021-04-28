@@ -9,17 +9,17 @@
 
             <thead>
             <tr>
-                <th scope="col"><span style="color: #696969; ">ID категории</span></th>
-                <th scope="col"><span style="color: #000000; ">Категория</th>
-                <th scope="col"><span style="color: #696969; ">Количество книг</th>
+                <th scope="col"><span>ID категории</span></th>
+                <th scope="col"><span>Категория</th>
+                <th scope="col"><span>Количество книг</th>
             </tr>
             </thead>
             <tbody>
             {% for cat in categories %}
             <tr>
-                <th scope="row"><span style="color: #808080; ">{{ cat.id }}</span></th>
-                <th scope="row"><span style="color: #808080; ">{{ cat.category}}</span></th>
-                <th scope="row"><span style="color: #808080; ">{{ cat.books_cat.count }}</span></th>
+                <th scope="row"><span>{{ cat.id }}</span></th>
+                <th scope="row"><span>{{ cat.category}}</span></th>
+                <th scope="row"><span>{{ cat.books_cat.count }}</span></th>
             </tr>
             {% endfor %}
             </tbody>

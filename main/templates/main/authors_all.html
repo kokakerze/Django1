@@ -9,19 +9,19 @@
 
             <thead>
             <tr>
-                <th scope="col"><span style="color: #000000; ">ID автора</span></th>
-                <th scope="col"><span style="color: #696969; ">Email автора</th>
-                <th scope="col"><span style="color: #000000; ">Количество книг</th>
-                <th scope="col"><span style="color: #696969; ">Имя автора</th>
+                <th scope="col"><span>ID автора</span></th>
+                <th scope="col"><span>Email автора</th>
+                <th scope="col"><span>Количество книг</th>
+                <th scope="col"><span>Имя автора</th>
             </tr>
             </thead>
             <tbody>
             {% for author in authors %}
                 <tr>
-                    <th scope="row"><span style="color: #808080; ">{{ author.id }}</span></th>
-                    <th scope="row"><span style="color: #808080; ">{{ author.email }}</span></th>
-                    <th scope="row"><span style="color: #808080; ">{{ author.books.count }}</span></th>
-                    <th scope="row"><span style="color: #808080; ">{{ author.name }}</span></th>
+                    <th scope="row"><span>{{ author.id }}</span></th>
+                    <th scope="row"><span>{{ author.email }}</span></th>
+                    <th scope="row"><span>{{ author.books.count }}</span></th>
+                    <th scope="row"><span>{{ author.name }}</span></th>
                 </tr>
             {% endfor %}
             </tbody>
