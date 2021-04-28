@@ -135,3 +135,11 @@ class Category(models.Model):
     """Set category for books."""
 
     category = models.CharField("Категория книги", max_length=40)
+
+
+class ContactUs(models.Model):
+    """Set contact us model."""
+
+    email = models.EmailField()
+    subject = models.CharField(max_length=120)
+    msg = models.TextField()

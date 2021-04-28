@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'main',
     'django_extensions',
+    "bootstrap4",
 
 ]
 

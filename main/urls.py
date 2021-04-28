@@ -15,6 +15,7 @@ urlpatterns = [
     path('posts/create/', views.post_create, name='post_create'),
     path('posts/update/<int:post_id>/', views.post_update, name='post_update'),
     path('posts/', views.posts_all, name='posts_all'),
+    path('posts/all/', views.PostsListView.as_view(), name='posts_list'),
     path('posts/<int:post_id>/', views.post_show, name='post_show'),
 
     path('subcribers/new/', views.subscribers_new, name='subscribers_new'),
@@ -28,4 +29,7 @@ urlpatterns = [
     path('api/posts/', views.api_posts, name='api_posts'),
     path('api/subcribe/', views.api_subscribe, name='api_subscribe'),
     path('api/authors/new/', views.api_authors_new, name='api_authors_new'),
+
+    path('contact-us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
+
 ]
