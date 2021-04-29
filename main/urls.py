@@ -16,6 +16,8 @@ urlpatterns = [
     path('posts/update/<int:post_id>/', views.post_update, name='post_update'),
     path('posts/', views.posts_all, name='posts_all'),
     path('posts/all/', views.PostsListView.as_view(), name='posts_list'),
+    path('posts/list/csv', views.PostCSVView.as_view(), name='posts_list_csv'),
+    path('posts/list/xls', views.PostXLSView.as_view(), name='posts_list_xls'),
     path('posts/<int:post_id>/', views.post_show, name='post_show'),
 
     path('subcribers/new/', views.subscribers_new, name='subscribers_new'),
