@@ -1,30 +1,30 @@
 run:
-	python manage.py runserver
+	python src/manage.py runserver
 
 
 new-migrations:
-	python manage.py makemigrations
+	python src/manage.py makemigrations
 
 
 migrate:
-	python manage.py migrate
+	python src/manage.py migrate
 
 lint:
 	flake8 .
 
 check:
-	python manage.py check
+	python src/manage.py check
 
 check-migrations:
-	python manage.py makemigrations --check --dry-run
+	python src/manage.py makemigrations --check --dry-run
 
 
 shell:
-	python manage.py shell_plus --print-sql
+	python src/manage.py shell_plus --print-sql
 
 
 createsuperuser:
-	python manage.py createsuperuser
+	python src/manage.py createsuperuser
 
 
 #	python manage.py startapp main

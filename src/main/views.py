@@ -1,9 +1,10 @@
 """ViewsFile that manages information that shows in urls."""
+import csv
 
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, View
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Book, Category, ContactUs, Post, Subscriber
@@ -12,6 +13,7 @@ from main.services.post_service import comment_method, post_find, postall
 from main.services.subscribe_service import subscribe
 from main.tasks import notify_async
 from prompt_toolkit.validation import ValidationError
+import xlwt
 
 
 def index(request):
@@ -179,8 +181,20 @@ def api_subscribe(request):
 class PostsListView(ListView):
     """Show list of posts analogously."""
 
-    queryset = Post.objects.all()
-    template_name = "main/posts_list.html"
+    # queryset = Post.objects.all()
+
+    def get_queryset(self):
+        """Set queryset to listview."""
+        queryset = Post.objects.all()
+        return queryset
+
+
+def get_context_data(self, *args, **kwargs):
+    """Set context data for ListView."""
+    context = super().get_context_data(*args, **kwargs)
+    context["cnt"] = context['object_list'].count()
+    context["title"] = "Все посты"
+    return context
 
 
 class ContactUsView(CreateView):
@@ -189,3 +203,67 @@ class ContactUsView(CreateView):
     success_url = reverse_lazy("homepage")
     model = ContactUs
     fields = ("email", "subject", "msg")
+
+
+def display_attribute(obj, attrs: str):
+    """Check of Nonviable attributes and show all attributes."""
+    get_display = f"get_{attrs}_display"
+    if hasattr(obj, get_display):
+        return getattr(obj, get_display)()
+    return getattr(obj, attrs)
+
+
+class PostCSVView(View):
+    """Download Posts in CSV format."""
+
+    headers = ["title", "description", "mood"]
+
+    def get(self, request, *args, **kwargs):
+        """Download list of posts in CSV."""
+        # Create the HttpResponse object with the appropriate CSV header.
+        response = HttpResponse(
+            content_type='text/csv',
+            # headers={'Content-Disposition': 'attachment; filename="somefilename.csv"'},
+        )
+
+        writer = csv.writer(response)
+        writer.writerow(self.headers)
+        for post in Post.objects.all().iterator():
+            # for header in headers:
+            #     if hasattr(post, f"get_{header}_display"):
+            row = [display_attribute(post, header) for header in self.headers]
+            writer.writerow(row)
+
+        return response
+
+
+class PostXLSView(View):
+    """Download Posts in XLS format."""
+
+    def get(self, request, *args, **kwargs):
+        """Download list of posts in CSV."""
+        # Create the HttpResponse object with the appropriate CSV header.
+        response = HttpResponse(
+            content_type='application/ms-excel'
+            # headers={'Content-Disposition': 'attachment; filename="somefilename.csv"'},
+        )
+        response['Content-Disposition'] = 'attachment; filename="PostsFromCleanBlog.xls"'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet("sheet1")
+        row_num = 0
+        columns = ["title", "content", "mood"]
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+        for col_num in range(len(columns)):
+            ws.write(row_num, col_num, columns[col_num], font_style)
+
+        font_style = xlwt.XFStyle()
+        data = Post.objects.all()
+        for post in data:
+            row_num = row_num + 1
+            ws.write(row_num, 0, post.title, font_style)
+            ws.write(row_num, 1, post.content, font_style)
+            ws.write(row_num, 2, post.mood, font_style)
+
+        wb.save(response)
+        return response

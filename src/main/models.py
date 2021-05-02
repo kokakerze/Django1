@@ -70,11 +70,18 @@ class Post(models.Model):
         db_table = "tb_posts"
         verbose_name = "Пост"
         verbose_name_plural = "Посты"
-
+    MOOD_CHOICES = (
+        (1, 'advertisments'),
+        (2, 'news'),
+        (3, 'weather'),
+        (4, 'business'),
+        (5, 'info'),
+    )
     """Setup title, description, content and dates of posts."""
     title = models.CharField("Заголовок поста", max_length=70)
     description = models.TextField("Описание поста", max_length=90)
     content = models.TextField("Контент поста")
+    mood = models.PositiveSmallIntegerField(choices=MOOD_CHOICES, default=5)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=now)
 
