@@ -2,9 +2,10 @@
 from datetime import datetime, timedelta
 
 from celery import shared_task
-from main.models import Logger, Subscriber
-from main.services.notify_service import email_send
 import requests
+
+from .models import Logger, Subscriber
+from .services.notify_service import email_send
 
 
 @shared_task
