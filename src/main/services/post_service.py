@@ -1,11 +1,20 @@
 """Show all posts method."""
-from main.forms import CommentsForm
-from main.models import Post
+import datetime
+
+from django.core.cache import cache
+
+from src.main.forms import CommentsForm
+from src.main.models import Post
 
 
 def postall():
     """Take all objects from Post class."""
-    objects_all = Post.objects.all()
+    key = Post().__class__.cache_key()
+    if key in cache:
+        objects_all = cache.get(key)
+    else:
+        objects_all = Post.objects.all()
+        cache.set(key,objects_all,30)
     return objects_all
 
 

@@ -1,4 +1,7 @@
 """Create models of Users and Posts in project."""
+from datetime import datetime
+
+from django.core.cache import cache
 from django.db import models
 from django.utils.timezone import now
 
@@ -70,6 +73,7 @@ class Post(models.Model):
         db_table = "tb_posts"
         verbose_name = "Пост"
         verbose_name_plural = "Посты"
+
     MOOD_CHOICES = (
         (1, 'advertisments'),
         (2, 'news'),
@@ -88,6 +92,17 @@ class Post(models.Model):
     def __str__(self):
         """Set method of printing."""
         return self.title
+
+    def save(self, **kwargs):
+        super(**kwargs).save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        dt = datetime.today().strftime('%y-%m-%d')
+        key = f'{dt}'
+        return key
 
 
 class Logger(models.Model):

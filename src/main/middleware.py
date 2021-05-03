@@ -1,7 +1,7 @@
 """Middleware file helps to take logs."""
 from time import time
 
-from main.models import Logger
+from src.main.models import Logger
 
 
 class SimpleMiddleware:

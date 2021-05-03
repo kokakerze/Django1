@@ -5,3 +5,4 @@ src/Django1/__pycache__/
 Makefile
 main/migrations/__pycache__/
 __pycache__/
+cc.py
