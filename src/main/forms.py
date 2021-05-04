@@ -2,7 +2,7 @@
 from django import forms
 from django.forms import ModelForm, Select, Textarea, TextInput
 
-from src.main.models import Author, Comments, Post, Subscriber
+from main.models import Author, Comments, Post, Subscriber
 
 
 class PostForm(ModelForm):

@@ -94,7 +94,7 @@ class Post(models.Model):
         return self.title
 
     def save(self, **kwargs):
-        super(**kwargs).save()
+        super().save()
         key = self.__class__.cache_key()
         cache.delete(key)
 

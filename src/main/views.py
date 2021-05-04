@@ -6,12 +6,12 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, View
 from faker import Faker
-from src.main.forms import PostForm, SubscriberForm
-from src.main.models import Author, Book, Category, ContactUs, Post, Subscriber
-from src.main.services.notify_service import notify
-from src.main.services.post_service import comment_method, post_find, postall
-from src.main.services.subscribe_service import subscribe
-from src.main.tasks import notify_async
+from main.forms import PostForm, SubscriberForm
+from main.models import Author, Book, Category, ContactUs, Post, Subscriber
+from main.services.notify_service import notify
+from main.services.post_service import comment_method, post_find, postall
+from main.services.subscribe_service import subscribe
+from main.tasks import notify_async
 from prompt_toolkit.validation import ValidationError
 import xlwt
 

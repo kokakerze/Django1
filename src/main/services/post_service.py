@@ -3,8 +3,8 @@ import datetime
 
 from django.core.cache import cache
 
-from src.main.forms import CommentsForm
-from src.main.models import Post
+from main.forms import CommentsForm
+from main.models import Post
 
 
 def postall():

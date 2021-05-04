@@ -15,7 +15,7 @@ urlpatterns = [
     path('posts/create/', views.post_create, name='post_create'),
     path('posts/update/<int:post_id>/', views.post_update, name='post_update'),
     path('posts/', views.posts_all, name='posts_all'),
-    path('posts/all/', views.PostsListView.as_view(), name='posts_list'),
+    path('posts/all/', cache.cache_page(120)(views.PostsListView.as_view()), name='posts_list'),
     path('posts/list/csv', views.PostCSVView.as_view(), name='posts_list_csv'),
     path('posts/list/xls', views.PostXLSView.as_view(), name='posts_list_xls'),
     path('posts/<int:post_id>/', views.post_show, name='post_show'),
@@ -23,9 +23,9 @@ urlpatterns = [
     path('subcribers/new/', views.subscribers_new, name='subscribers_new'),
     path('subcribers/all/', views.subscribers_all, name='subscribers_all'),
     path('authors/new/', views.authors_new, name='authors_new'),
-    path('authors/all/', views.authors_all, name='authors_all'),
+    path('authors/all/', cache.cache_page(30)(views.authors_all), name='authors_all'),
     path('books/all/', views.books_all, name='books_all'),
-    path('category/all/', views.category_all, name='category_all'),
+    path('category/all/', cache.cache_page(600)(views.category_all), name='category_all'),
 
 
     path('api/posts/', views.api_posts, name='api_posts'),

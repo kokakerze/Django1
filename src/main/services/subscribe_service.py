@@ -1,7 +1,7 @@
 """Subscribers service."""
 from django.core.exceptions import ObjectDoesNotExist
-from src.main.models import Author
-from src.main.models import Subscriber
+from main.models import Author
+from main.models import Subscriber
 
 
 def subscribe(author_id, email_to):
