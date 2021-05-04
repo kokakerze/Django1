@@ -1,8 +1,6 @@
 """Show all posts method."""
-import datetime
 
 from django.core.cache import cache
-
 from main.forms import CommentsForm
 from main.models import Post
 
@@ -14,7 +12,7 @@ def postall():
         objects_all = cache.get(key)
     else:
         objects_all = Post.objects.all()
-        cache.set(key,objects_all,30)
+        cache.set(key, objects_all, 30)
     return objects_all
 
 

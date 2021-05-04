@@ -94,12 +94,14 @@ class Post(models.Model):
         return self.title
 
     def save(self, **kwargs):
+        """Save in custom method for cache_page."""
         super().save()
         key = self.__class__.cache_key()
         cache.delete(key)
 
     @classmethod
     def cache_key(cls):
+        """Save in custom cached method."""
         dt = datetime.today().strftime('%y-%m-%d')
         key = f'{dt}'
         return key
