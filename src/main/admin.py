@@ -1,6 +1,7 @@
 """File registering models."""
 from django.contrib import admin
-from main.models import Author, Comments, Logger, Post, Subscriber
+
+from .models import Author, Comments, Logger, Post, Subscriber
 
 
 # Register your models here.

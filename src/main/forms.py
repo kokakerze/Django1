@@ -1,8 +1,7 @@
 """File creating PostForm from ModelForm."""
 from django import forms
 from django.forms import ModelForm, Select, Textarea, TextInput
-
-from .models import Author, Comments, Post, Subscriber
+from main.models import Author, Comments, Post, Subscriber
 
 
 class PostForm(ModelForm):

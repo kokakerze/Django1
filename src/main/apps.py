@@ -3,8 +3,9 @@ from django.apps import AppConfig
 
 
 class MainConfig(AppConfig):
-    """Set MainConfig."""
+    """New configurations for django."""
 
+    default_auto_field = 'django.db.models.AutoField'
     name = 'main'
 
     def ready(self):
