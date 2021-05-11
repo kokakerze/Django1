@@ -11,6 +11,13 @@
                     <div class="list-group">
                           <a href="{%  url "post_update" post_id=pst.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                             {{ pst.content }}</a>
+                    <br>
+                                <br>
+                                {% if request.user.is_authenticated %}
+                                <form action="{% url "post_delete"  pst.id  %}">
+                                    <button class="btn btn-danger">Удалить</button>
+                                </form>
+                                {% endif %}
                     <hr>
                               {% with comments.count as total_comments %}
                                   <br>

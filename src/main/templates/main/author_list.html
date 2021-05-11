@@ -1,9 +1,9 @@
 {% extends "main/base.html" %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Автора{% endblock %}
 {% block  content %}
     <div class="container"></div>
-    <h1>{{ title }}</h1>
+    <h1>Авторы</h1>
     <div class="payload">
         <table class="table table-hover">
 
@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for author in authors %}
+            {% for author in author_list %}
                 <tr>
                     <th scope="row"><span>{{ author.id }}</span></th>
                     <th scope="row"><span>{{ author.email }}</span></th>

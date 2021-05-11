@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block  content %}
+
+    <div class="select2-container"></div>
+        <h1>Войти в аккаунт</h1>
+        <div class="error"></div>
+        <div class="payload">
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-success">Войти</button>
+            </form>
+        </div>
+
+{% endblock %}

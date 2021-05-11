@@ -151,7 +151,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#AUTH CONFIGURATION
+# AUTH CONFIGURATION
 AUTH_USER_MODEL = 'account.user'
 
 
