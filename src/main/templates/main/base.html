@@ -50,9 +50,9 @@
             <li class="nav-item">
             <a class="nav-link" href="{% url "subscribers_new" %}">Подписаться на автора</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{% url "authors_new" %}">Сгенерировать автора</a>
-          </li>
+{#            <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "authors_new" %}">Сгенерировать автора</a>#}
+{#          </li>#}
             <li class="nav-item">
             <a class="nav-link" href="{% url "authors_all" %}">Все авторы</a>
           </li>
@@ -65,12 +65,17 @@
             <li class="nav-item">
             <a class="nav-link" href="{% url "contact-us-create" %}">Связаться с нами</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{% url "posts_list_csv" %}">Скачать посты в CSV </a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{% url "posts_list_xls" %}">Скачать посты в XLS </a>
-          </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                <a class="nav-link" href="{% url "account:my_profile" %}">Аккаунт</a>
+              </li>
+            {% endif %}
+{#            <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "posts_list_csv" %}">Скачать посты в CSV </a>#}
+{#          </li>#}
+{#            <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "posts_list_xls" %}">Скачать посты в XLS </a>#}
+{#          </li>#}
         </ul>
       </div>
     </div>

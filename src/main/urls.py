@@ -14,6 +14,7 @@ urlpatterns = [
 
     path('posts/create/', views.post_create, name='post_create'),
     path('posts/update/<int:post_id>/', views.post_update, name='post_update'),
+    path('posts/<int:pk>/delete/', views.DeletePostView.as_view(), name='post_delete'),
     path('posts/', views.posts_all, name='posts_all'),
     path('posts/all/', cache.cache_page(120)(views.PostsListView.as_view()), name='posts_list'),
     path('posts/list/csv', views.PostCSVView.as_view(), name='posts_list_csv'),
@@ -23,7 +24,8 @@ urlpatterns = [
     path('subcribers/new/', views.subscribers_new, name='subscribers_new'),
     path('subcribers/all/', views.subscribers_all, name='subscribers_all'),
     path('authors/new/', views.authors_new, name='authors_new'),
-    path('authors/all/', cache.cache_page(30)(views.authors_all), name='authors_all'),
+    path('authors/<int:pk>/delete/', views.DeleteAuthorsView.as_view(), name='author_delete'),
+    path('authors/all/', views.AuthorsListView.as_view(), name='authors_all'),
     path('books/all/', views.books_all, name='books_all'),
     path('category/all/', cache.cache_page(600)(views.category_all), name='category_all'),
 

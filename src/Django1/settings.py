@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django_extensions',
     "bootstrap4",
     'main',
+    'account',
 
 
 ]
@@ -149,6 +150,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# AUTH CONFIGURATION
+AUTH_USER_MODEL = 'account.user'
+
 
 # TELEGRAM_BOT_API = "bot122456789"
 

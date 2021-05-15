@@ -1,10 +1,11 @@
 """ViewsFile that manages information that shows in urls."""
 import csv
 
+from django.core.cache import cache
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, View
+from django.views.generic import CreateView, DeleteView, ListView, View
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Book, Category, ContactUs, Post, Subscriber
@@ -100,11 +101,11 @@ def authors_new(request):
     return redirect("authors_all")
 
 
-def authors_all(request):
-    """Show a list of authors."""
-    allauthors = Author.objects.all().prefetch_related("books")
-    context = {"title": "Авторы", "authors": allauthors}
-    return render(request, "main/authors_all.html", context)
+# def authors_all(request):
+#     """Show a list of authors."""
+#     allauthors = Author.objects.all().prefetch_related("books")
+#     context = {"title": "Авторы", "authors": allauthors}
+#     return render(request, "main/authors_all.html", context)
 
 
 def books_all(request):
@@ -188,13 +189,12 @@ class PostsListView(ListView):
         queryset = Post.objects.all()
         return queryset
 
-
-def get_context_data(self, *args, **kwargs):
-    """Set context data for ListView."""
-    context = super().get_context_data(*args, **kwargs)
-    context["cnt"] = context['object_list'].count()
-    context["title"] = "Все посты"
-    return context
+    def get_context_data(self, *args, **kwargs):
+        """Set context data for ListView."""
+        context = super().get_context_data(*args, **kwargs)
+        context["cnt"] = context['object_list'].count()
+        context["title"] = "Все посты"
+        return context
 
 
 class ContactUsView(CreateView):
@@ -267,3 +267,33 @@ class PostXLSView(View):
 
         wb.save(response)
         return response
+
+
+class AuthorsListView(ListView):
+    """Show list of posts analogously."""
+
+    def get_queryset(self):
+        """Set queryset to listview."""
+        key = Author().__class__.cache_key()
+        if key in cache:
+            queryset = cache.get(key)
+        else:
+            queryset = Author.objects.all().prefetch_related("books")
+            cache.set(key, queryset, 60)
+        return queryset
+
+
+class DeletePostView(DeleteView):
+    """Delete posts."""
+
+    model = Post
+    template_name = "main/post_delete.html"
+    success_url = reverse_lazy("posts_list")
+
+
+class DeleteAuthorsView(DeleteView):
+    """Delete Authors."""
+
+    model = Author
+    template_name = "main/author_delete.html"
+    success_url = reverse_lazy("authors_all")

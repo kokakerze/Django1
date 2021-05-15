@@ -35,6 +35,29 @@ class Author(models.Model):
         """Property of printing full name."""
         return f'{self.name} {self.last_name}'
 
+    # def get_absolute_url(self):
+    #     """Set absolute link."""
+    #     return reverse('authors_all')
+
+    def save(self, **kwargs):
+        """Save in custom method for cache_page."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    def delete(self, **kwargs):
+        """Delete in custom method for cache_page."""
+        super().delete()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Save in custom cached method."""
+        dt = datetime.today().strftime('%y-%m-%d')
+        key = f'{dt}'
+        return key
+
     # def save(self, *args, **kwargs):
     #     print("Author before save.")
     #     self.name = self.name.lower()
@@ -105,6 +128,10 @@ class Post(models.Model):
         dt = datetime.today().strftime('%y-%m-%d')
         key = f'{dt}'
         return key
+
+    # def get_absolute_url(self):
+    #     """Set absolute link."""
+    #     return reverse('post_list')
 
 
 class Logger(models.Model):
