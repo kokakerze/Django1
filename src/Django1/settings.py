@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 # Celery configuration
 CELERY_BROKER_URL = 'amqp://localhost'
 
@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     "bootstrap4",
     'main',
     'account',
-
 
 ]
 
@@ -151,14 +150,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
+
 # AUTH CONFIGURATION
 AUTH_USER_MODEL = 'account.user'
-
 
 # TELEGRAM_BOT_API = "bot122456789"
 
 INTERNAL_IPS = [
     '127.0.0.1',
+    '0.0.0.0'
 ]
 
 EMAIL_HOST_USER = "pavlovdesigh@gmail.com"
