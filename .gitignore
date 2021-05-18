@@ -6,7 +6,7 @@ Makefile
 main/migrations/__pycache__/
 __pycache__/
 cc.py
-
+up_on_digitalocean_servers.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
