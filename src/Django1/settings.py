@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 # Celery configuration
