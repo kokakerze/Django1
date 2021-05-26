@@ -40,8 +40,12 @@ collect-static:
 	$(MANAGE) collectstatic
 
 test:
-	cd src && pytest --cov=main --cov-report=html --cov-fail=40
+	cd src && pytest --cov=main --cov-report=html --cov-fail-under=40
 	open static_content/coverage/index.html
+
+unitest:
+	cd src && pytest
+
 #	python manage.py startapp main
 #	pip install django
 #	pip install Faker

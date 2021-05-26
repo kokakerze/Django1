@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 # Celery configuration
@@ -37,10 +37,12 @@ CELERY_BEAT_SCHEDULE = {
     "delete_logs": {
         "task": "main.task.delete_logs",
         "schedule": crontab(minute="0", hour="1")
+
     },
     "mail_send_9am": {
         "task": "main.task.mail_send_9am",
-        "schedule": crontab(minute="0", hour="9")
+        "schedule": crontab(minute="*")
+        # "schedule": crontab(minute="0", hour="9")
     }
 }
 

@@ -16,9 +16,9 @@ class SimpleMiddleware:
         """Make a Body of SimpleMiddleware."""
         # Code to be executed for each request before
         # the view (and later middleware) are called.
-        st = time()
+        # st = time()
         response = self.get_response(request)
-        print(f"Time executed:{time() - st}; path:{request.path}")
+        # print(f"Time executed:{time() - st}; path:{request.path}")
         # Code to be executed for each request/response after
         # the view is called.
 
