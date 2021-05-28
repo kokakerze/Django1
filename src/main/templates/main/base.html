@@ -69,6 +69,19 @@
                 <li class="nav-item">
                 <a class="nav-link" href="{% url "account:my_profile" %}">Аккаунт</a>
               </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url "account:change_password" %}">Сменить пароль</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url "account:logout" %}">Выход</a>
+              </li>
+            {% else %}
+                <li class="nav-item">
+                <a class="nav-link" href="{% url "account:signup" %}">Регистрация</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url "account:login" %}">Вход</a>
+              </li>
             {% endif %}
 {#            <li class="nav-item">#}
 {#            <a class="nav-link" href="{% url "posts_list_csv" %}">Скачать посты в CSV </a>#}

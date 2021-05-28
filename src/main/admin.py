@@ -1,4 +1,5 @@
 """File registering models."""
+from account.models import User
 from django.contrib import admin
 
 from .models import Author, Comments, Logger, Post, Subscriber
@@ -18,3 +19,4 @@ admin.site.register(Post)
 admin.site.register(Subscriber)
 admin.site.register(Logger)
 admin.site.register(Comments, CommentAdmin)
+admin.site.register(User)
