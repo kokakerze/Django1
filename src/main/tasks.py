@@ -2,10 +2,9 @@
 from datetime import datetime, timedelta
 
 from celery import shared_task
+from main.models import Logger, Subscriber
+from main.services.notify_service import email_send
 import requests
-
-from .models import Logger, Subscriber
-from .services.notify_service import email_send
 
 
 @shared_task
@@ -28,7 +27,7 @@ def mail_send_9am():
     result = requests.get('https://tproger.ru/wp-content/plugins/citation-widget/get-quote.php')
     page = result.text
     emails = list(Subscriber.objects.values_list("email_to", flat=True))
-
+    breakpoint()
     send_mail(
         "DesignBlog",
         page,

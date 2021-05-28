@@ -37,10 +37,12 @@ CELERY_BEAT_SCHEDULE = {
     "delete_logs": {
         "task": "main.task.delete_logs",
         "schedule": crontab(minute="0", hour="1")
+
     },
     "mail_send_9am": {
         "task": "main.task.mail_send_9am",
-        "schedule": crontab(minute="0", hour="9")
+        "schedule": crontab(minute="*")
+        # "schedule": crontab(minute="0", hour="9")
     }
 }
 

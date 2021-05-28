@@ -69,7 +69,6 @@ def subscribers_new(request):
     if subscribe_success:
         delayed_notify(request)
         return redirect("subscribers_all")
-
     context = {"form": form, "errors": errors}
     return render(request, "main/subscribers_new.html", context=context)
 

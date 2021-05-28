@@ -1,0 +1,20 @@
+
+[run]
+branch = True
+omit = src/manage.py,
+      */migrations/*,
+      */tests/*,
+      src/Django1/settings*.py
+      src/Django1/wsgi*.py,
+
+
+[report]
+precision = 2
+exclude_lines =
+    pragma:  no cover
+    def __repr__
+    def __str__
+
+
+[html]
+directory = ../static_content/coverage

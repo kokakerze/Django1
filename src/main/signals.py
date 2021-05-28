@@ -8,7 +8,7 @@ from .models import Author
 @receiver(pre_save, sender=Author)
 def author_pre_save(sender, instance, **kwargs):
     """Signal post saving in Author."""
-    print('-----------pre_save')
+    # print('-----------pre_save')
     # breakpoint()
     instance.name = instance.name.lower()
     instance.email = instance.email
@@ -17,7 +17,7 @@ def author_pre_save(sender, instance, **kwargs):
 @receiver(post_save, sender=Author)
 def author_post_save(sender, instance, created, **kwargs):
     """Signal post saving in Author."""
-    print('===========post_save')
+    # print('===========post_save')
     # breakpoint()
     # instance.name = instance.name + "[name author]"
     if created:
