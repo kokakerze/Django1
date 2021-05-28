@@ -27,7 +27,6 @@ def mail_send_9am():
     result = requests.get('https://tproger.ru/wp-content/plugins/citation-widget/get-quote.php')
     page = result.text
     emails = list(Subscriber.objects.values_list("email_to", flat=True))
-    breakpoint()
     send_mail(
         "DesignBlog",
         page,
