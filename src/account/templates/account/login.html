@@ -5,6 +5,7 @@
 {% block content %}
   <h2>Вход</h2>
   <form method="post">
+    {{ form.errors }}
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn btn-success">Войти</button>

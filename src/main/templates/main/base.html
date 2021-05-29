@@ -38,9 +38,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url "homepage" %}">Главная</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "about" %}">О нас</a>
-          </li>
+{#          <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "about" %}">О нас</a>#}
+{#          </li>#}
           <li class="nav-item">
             <a class="nav-link" href="{% url "posts_list" %}">Посты</a>
           </li>
@@ -56,12 +56,12 @@
             <li class="nav-item">
             <a class="nav-link" href="{% url "authors_all" %}">Все авторы</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{% url "books_all" %}">Все книги</a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{% url "category_all" %}">Все категории</a>
-          </li>
+{#            <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "books_all" %}">Все книги</a>#}
+{#          </li>#}
+{#            <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "category_all" %}">Все категории</a>#}
+{#          </li>#}
             <li class="nav-item">
             <a class="nav-link" href="{% url "contact-us-create" %}">Связаться с нами</a>
           </li>
@@ -71,6 +71,10 @@
               </li>
                 <li class="nav-item">
                 <a class="nav-link" href="{% url "account:change_password" %}">Сменить пароль</a>
+              </li>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url "account:password_reset" %}">Восстановить пароль</a>
               </li>
                 <li class="nav-item">
                 <a class="nav-link" href="{% url "account:logout" %}">Выход</a>
@@ -85,7 +89,6 @@
             {% endif %}
 {#            <li class="nav-item">#}
 {#            <a class="nav-link" href="{% url "posts_list_csv" %}">Скачать посты в CSV </a>#}
-{#          </li>#}
 {#            <li class="nav-item">#}
 {#            <a class="nav-link" href="{% url "posts_list_xls" %}">Скачать посты в XLS </a>#}
 {#          </li>#}

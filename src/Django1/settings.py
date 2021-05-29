@@ -186,3 +186,4 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 DOMAIN = 'http://0.0.0.0:8000'
 LOGIN_REDIRECT_URL = '/'
+REDIRECT_FIELD_NAME = '/'
