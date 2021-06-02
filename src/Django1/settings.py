@@ -25,12 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 ALLOWED_HOSTS = ['*']
+
 # Celery configuration
 CELERY_BROKER_URL = 'amqp://localhost'
-
 CELERY_TIMEZONE = "Europe/Kiev"
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
@@ -41,13 +40,11 @@ CELERY_BEAT_SCHEDULE = {
     },
     "mail_send_9am": {
         "task": "main.task.mail_send_9am",
-        "schedule": crontab(minute="*")
-        # "schedule": crontab(minute="0", hour="9")
+        "schedule": crontab(minute="0", hour="9")
     }
 }
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'debug_toolbar',
     'django_extensions',
     "bootstrap4",
@@ -186,3 +184,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DOMAIN = 'http://0.0.0.0:8000'
+LOGIN_REDIRECT_URL = '/'
+REDIRECT_FIELD_NAME = '/'
