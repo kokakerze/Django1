@@ -47,5 +47,5 @@ class UserRegisterForm(forms.ModelForm):
         instance.set_password(self.cleaned_data["password"])
         instance.save()
         """Making send mail not in view, cause in view User dont have id."""
-        send_activation_link_mail(instance.id)
+        send_activation_link_mail.apply_async(instance.id)
         return instance
