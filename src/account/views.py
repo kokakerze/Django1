@@ -1,6 +1,6 @@
 """Manage information that shows in urls for account."""
-from account.forms import UserRegisterForm
-from account.models import User
+from .forms import UserRegisterForm
+from .models import User
 from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash

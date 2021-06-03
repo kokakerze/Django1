@@ -29,7 +29,15 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Celery configuration
-CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_BROKER_URL = 'amqp://localhost'
+
+CELERY_BROKER_URL = 'amqp://{0}:{1}@{2}:5672'.format(
+    os.environ.get('RABBITMQ_DEFAULT_USER', "guest"),
+    os.environ.get('RABBITMQ_DEFAULT_PASS', "guest"),
+    os.environ.get('RABBITMQ_DEFAULT_HOST', "localhost"),
+)
+print(CELERY_BROKER_URL)
+
 CELERY_TIMEZONE = "Europe/Kiev"
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
