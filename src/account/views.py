@@ -1,6 +1,4 @@
 """Manage information that shows in urls for account."""
-from .forms import UserRegisterForm
-from .models import User
 from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
@@ -11,6 +9,9 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, UpdateView
+
+from .forms import UserRegisterForm
+from .models import User
 
 
 # Create your views here.
