@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  backend:
+    build: .
+    container_name: ssb-backend
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+    - "8001:8111"
+    volumes:
+      - ./:/srv/project
+    depends_on:
+      - memcached
+
+  memcached:
+    image: memcached:1.6.9
+    container_name: memcached
+    tty: true
+    stdin_open: true
+    restart: always
+

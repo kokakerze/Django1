@@ -46,6 +46,14 @@ test:
 unitest:
 	cd src && pytest
 
+dkr-rn:
+	docker run --rm -t -d -p 8001:8111 --name ssb ssb:1.0
+
+dkr-bld:
+	docker build -t ssb:1.0 .
+
+dkr-st:
+	docker container stop ssb
 #	python manage.py startapp main
 #	pip install django
 #	pip install Faker
