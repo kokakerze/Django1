@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import mimetypes
 import os
 from pathlib import Path
 
@@ -22,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = ['*']
-
+DEBUG = os.environ.get('SERVER_MODE') == "1"
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(":")
 # Celery configuration
 # CELERY_BROKER_URL = 'amqp://localhost'
 
@@ -167,13 +168,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/html", ".css", True)
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
+STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
 
 # AUTH CONFIGURATION
 AUTH_USER_MODEL = 'account.user'
@@ -185,13 +190,9 @@ INTERNAL_IPS = [
     '0.0.0.0'
 ]
 
-EMAIL_HOST_USER = "pavlovdesigh@gmail.com"
-EMAIL_HOST_PASSWORD = "pavlov2020"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-DOMAIN = 'http://0.0.0.0:8000'
-LOGIN_REDIRECT_URL = '/'
-REDIRECT_FIELD_NAME = '/'
+if DEBUG:
+    import socket
+
+    DEBUG_TOOLBAR_PATCH_SETTINGS = True
+
+    INTERNAL_IPS = [socket.gethostbyname(socket.gethostname())[:-1] + '1']
