@@ -29,7 +29,15 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Celery configuration
-CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_BROKER_URL = 'amqp://localhost'
+
+CELERY_BROKER_URL = 'amqp://{0}:{1}@{2}:5672'.format(
+    os.environ.get('RABBITMQ_DEFAULT_USER', "guest"),
+    os.environ.get('RABBITMQ_DEFAULT_PASS', "guest"),
+    os.environ.get('RABBITMQ_DEFAULT_HOST', "localhost"),
+)
+print(CELERY_BROKER_URL)
+
 CELERY_TIMEZONE = "Europe/Kiev"
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
@@ -98,30 +106,30 @@ WSGI_APPLICATION = 'Django1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_ssb',
-        'USER': 'postgres',
-        'PASSWORD': 'ssb',
-        'HOST': '127.0.0.1',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'db_ssb',
+#         'USER': 'postgres',
+#         'PASSWORD': 'ssb',
+#         'HOST': '127.0.0.1',
+#         'PORT': '',
+#     }
+# }
 
 # CACHED
 
 CACHE = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+        'LOCATION': 'memcached:11211',
     }
 }
 

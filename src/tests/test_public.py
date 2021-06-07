@@ -5,7 +5,7 @@ import pytest
 from django.test import Client, SimpleTestCase
 from django.urls import reverse
 
-from main.models import ContactUs, Post, Subscriber, Author
+from src.main.models import ContactUs, Post, Subscriber, Author
 
 
 def test_contact_us_show(client):

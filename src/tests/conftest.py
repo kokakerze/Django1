@@ -2,8 +2,8 @@ import pytest
 
 from faker import Faker
 
-from account.models import User
-from main.models import Author, Post, Subscriber
+from src.account.models import User
+from src.main.models import Author, Post, Subscriber
 from random import randint
 
 
