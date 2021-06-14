@@ -9,7 +9,6 @@ from django.core.mail import send_mail
 def send_activation_link_mail(user_id):
     """Send activation link to the registered user."""
     user = User.objects.get(id=user_id)
-    breakpoint()
     link = settings.DOMAIN + "/activate/" + str(user.confirmation_token)
     msg = f"Activation link {link}"
     send_mail(
