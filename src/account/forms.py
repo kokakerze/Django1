@@ -1,12 +1,10 @@
 """Account forms file."""
+from account.models import Avatar, User
+from account.tasks import send_activation_link_mail
 from django import forms
-from django.contrib.auth.forms import UsernameField, ReadOnlyPasswordHashField, UserChangeForm
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserChangeForm, UsernameField
 from django.db import transaction
 from django.utils.text import slugify
-
-
-from account.models import User, Avatar
-from account.tasks import send_activation_link_mail
 
 
 class UserRegisterForm(forms.ModelForm):
@@ -55,15 +53,21 @@ class UserRegisterForm(forms.ModelForm):
 
 
 class AvatarForm(forms.ModelForm):
+    """Create profile image form."""
+
     class Meta:
+        """Initialize model and fields for avatar form."""
+
         model = Avatar
         fields = ("file_path",)
 
     def __init__(self, request, *args, **kwargs):
+        """Initialize request object."""
         self.request = request
         super().__init__(*args, **kwargs)
 
     def save(self, commit=False):
+        """Return instance after saving."""
         instance = super().save(commit=False)
         instance.user = self.request.user
         instance.save()
@@ -71,10 +75,12 @@ class AvatarForm(forms.ModelForm):
 
 
 class ProfileForm(UserChangeForm):
+    """Create ProfileForm for User using UserChangeForm."""
+
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": 'form-control', "placeholder": "Ваш имейл"}))
-    first_name = forms.CharField(max_length=100,widget=forms.TextInput(attrs={"class": 'form-control'}))
-    last_name = forms.CharField(max_length=100,widget=forms.TextInput(attrs={"class": 'form-control'}))
-    username = forms.CharField(max_length=100,widget=forms.TextInput(attrs={"class": 'form-control'}))
+    first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"class": 'form-control'}))
+    last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"class": 'form-control'}))
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"class": 'form-control'}))
 
     password = ReadOnlyPasswordHashField(
         label=("Password"),
@@ -86,11 +92,14 @@ class ProfileForm(UserChangeForm):
     )
 
     class Meta:
+        """Initialize model, fields and field classes for ProfileForm."""
+
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password',)
         field_classes = {'username': UsernameField}
 
     def __init__(self, *args, **kwargs):
+        """Initialize queryset for user permissions after creation."""
         super().__init__(*args, **kwargs)
         password = self.fields.get('password')
         if password:
@@ -100,9 +109,11 @@ class ProfileForm(UserChangeForm):
             user_permissions.queryset = user_permissions.queryset.select_related('content_type')
 
     def clean_password(self):
+        """Return clean password."""
         return self.initial.get('password')
 
     def save(self, commit=False):
+        """Super save method for ProfileForm."""
         instance = super().save(commit=False)
         instance.user = self.request.user
         instance.save()

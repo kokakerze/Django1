@@ -1,10 +1,8 @@
 """Register account urls."""
-from django.conf.urls.static import static
+from account import views
 from django.contrib.auth import views as auth_views
 from django.urls import path, reverse_lazy
 
-from Django1 import settings
-from account import views
 
 app_name = "account"
 

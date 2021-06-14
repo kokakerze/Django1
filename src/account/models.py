@@ -15,15 +15,20 @@ class User(AbstractUser):
 
 
 def user_ava_upload(instance, filename):
+    """Save in users id folder profile_picture."""
     return f'{instance.user_id}/{filename}'
 
 
 class Avatar(models.Model):
+    """Profile picture model."""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file_path = models.ImageField(upload_to=user_ava_upload)
 
 
 class Profile(models.Model):
+    """Profile model as addition to each User."""
+
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
     profile_picture = models.ImageField(null=True, blank=True, upload_to=user_ava_upload)
@@ -33,4 +38,5 @@ class Profile(models.Model):
     instagram_url = models.URLField(max_length=255, null=True, blank=True)
 
     def __str__(self):
+        """Return a string representation of user."""
         return str(self.user)

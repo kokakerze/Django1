@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "bootstrap4",
     'account',
     'main',
+    'rest_framework',
 
 
 ]
@@ -188,9 +189,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_content')
 
 # AUTH CONFIGURATION
 AUTH_USER_MODEL = 'account.user'
-
-
-
 
 # TELEGRAM_BOT_API = "bot122456789"
 

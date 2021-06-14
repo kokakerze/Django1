@@ -109,6 +109,8 @@ copy-static:
 dkr-runserver-breakpoint:
 	docker exec -it ssb-backend $(MANAGE) runserver 0.0.0.0:9000
 
+urls:
+	$(MANAGE) show_urls
 
 
 

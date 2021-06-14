@@ -1,4 +1,7 @@
 """Manage information that shows in urls for account."""
+
+from account.forms import AvatarForm, ProfileForm, UserRegisterForm
+from account.models import Avatar, Profile, User
 from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
@@ -8,21 +11,19 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, ListView, UpdateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from account.forms import UserRegisterForm, AvatarForm, ProfileForm
-from account.models import Avatar, User, Profile
-
-
-# Create your views here.
 
 class ShowProfilePageView(DetailView):
+    """Show profile View."""
+
     model = Profile
     template_name = 'account/user_profile.html'
     queryset = Avatar.objects.all()
 
     def get_context_data(self, *args, **kwargs):
-        avatar = Avatar.objects.all()
+        """Return context data for Profile."""
+        # avatar = Avatar.objects.all()
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
         page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
         context['page_user'] = page_user
@@ -33,13 +34,14 @@ class ShowProfilePageView(DetailView):
         return self.request.user
 
     def get_queryset(self):
+        """Get queryset and return filtered list."""
         queryset = super().get_queryset()
         return queryset.filter(user=self.request.user)
 
 
-
 class EditProfile(LoginRequiredMixin, UpdateView):
     """Update profiles."""
+
     form_class = ProfileForm
     # queryset = User.objects.filter(is_active=True)
     # fields = ("first_name", "email")
@@ -48,8 +50,6 @@ class EditProfile(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         """Get user from request."""
         return self.request.user
-
-
 
 
 class SignUpView(CreateView):
@@ -105,6 +105,8 @@ def logout(request):
 
 
 class AvaCreateView(LoginRequiredMixin, CreateView):
+    """Create Avatar View."""
+
     model = Avatar
     form_class = AvatarForm
     success_url = reverse_lazy("homepage")
@@ -116,15 +118,19 @@ class AvaCreateView(LoginRequiredMixin, CreateView):
     #     return form_class(request=self.request, **self.get_form_kwargs())
 
     def get_form_kwargs(self):
+        """Return super kwargs."""
         super_kwargs = super().get_form_kwargs()
         super_kwargs["request"] = self.request
         return super_kwargs
 
 
 class AvaListView(LoginRequiredMixin, ListView):
+    """Create User Profile Picture List."""
+
     queryset = Avatar.objects.all()
 
     def get_queryset(self):
+        """Take queryset from Avatar."""
         queryset = super().get_queryset()
         return queryset.filter(user=self.request.user)
 

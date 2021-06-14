@@ -2,11 +2,11 @@
 # from django.contrib import admin
 # from django.conf.urls import url
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import include, path
 from django.views.decorators import cache
 from django.views.generic import TemplateView
-
 from Django1 import settings
+
 from . import views
 
 urlpatterns = [
@@ -32,10 +32,8 @@ urlpatterns = [
     path('category/all/', cache.cache_page(600)(views.category_all), name='category_all'),
 
 
-    path('api/posts/', views.api_posts, name='api_posts'),
-    path('api/subcribe/', views.api_subscribe, name='api_subscribe'),
-    path('api/authors/new/', views.api_authors_new, name='api_authors_new'),
+    path('api/v1/', include('api.urls')),
 
     path('contact-us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

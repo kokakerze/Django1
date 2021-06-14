@@ -1,5 +1,5 @@
 """File registering models."""
-from account.models import Avatar, User, Profile
+from account.models import Avatar, Profile, User
 from django.contrib import admin
 
 from .models import Author, Comments, Logger, Post, Subscriber
