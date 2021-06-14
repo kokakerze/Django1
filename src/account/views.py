@@ -8,25 +8,48 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
-from .forms import UserRegisterForm
-from .models import User
+from account.forms import UserRegisterForm, AvatarForm, ProfileForm
+from account.models import Avatar, User, Profile
 
 
 # Create your views here.
 
+class ShowProfilePageView(DetailView):
+    model = Profile
+    template_name = 'account/user_profile.html'
+    queryset = Avatar.objects.all()
 
-class MyProfile(LoginRequiredMixin, UpdateView):
+    def get_context_data(self, *args, **kwargs):
+        avatar = Avatar.objects.all()
+        context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
+        context['page_user'] = page_user
+        return context
+
+    def get_object(self, queryset=None):
+        """Get user from request."""
+        return self.request.user
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+
+
+
+class EditProfile(LoginRequiredMixin, UpdateView):
     """Update profiles."""
-
-    queryset = User.objects.filter(is_active=True)
-    fields = ("first_name", "last_name",)
+    form_class = ProfileForm
+    # queryset = User.objects.filter(is_active=True)
+    # fields = ("first_name", "email")
     success_url = reverse_lazy("homepage")
 
     def get_object(self, queryset=None):
         """Get user from request."""
         return self.request.user
+
+
 
 
 class SignUpView(CreateView):
@@ -79,3 +102,31 @@ def logout(request):
     """Logout current user."""
     auth_logout(request)
     return redirect("homepage")
+
+
+class AvaCreateView(LoginRequiredMixin, CreateView):
+    model = Avatar
+    form_class = AvatarForm
+    success_url = reverse_lazy("homepage")
+
+    # def get_form(self, form_class=None):
+    #     """Return an instance of the form to be used in this view."""
+    #     if form_class is None:
+    #         form_class = self.get_form_class()
+    #     return form_class(request=self.request, **self.get_form_kwargs())
+
+    def get_form_kwargs(self):
+        super_kwargs = super().get_form_kwargs()
+        super_kwargs["request"] = self.request
+        return super_kwargs
+
+
+class AvaListView(LoginRequiredMixin, ListView):
+    queryset = Avatar.objects.all()
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+
+    # def get_queryset(self):
+    #     return self.request.user.avatar_set.all()

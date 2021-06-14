@@ -1,10 +1,12 @@
 """This file sets urls for website."""
 # from django.contrib import admin
 # from django.conf.urls import url
+from django.conf.urls.static import static
 from django.urls import path
 from django.views.decorators import cache
 from django.views.generic import TemplateView
 
+from Django1 import settings
 from . import views
 
 urlpatterns = [
@@ -36,4 +38,4 @@ urlpatterns = [
 
     path('contact-us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

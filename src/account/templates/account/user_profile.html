@@ -1,0 +1,48 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block  content %}
+{% load static %}
+    <div class="select2-container"></div>
+        <h1>Личный кабинет - {{ page_user }}</h1>
+    <div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+
+    <div class="col-md-4">
+        {% if page_user.profile_picture%}
+            <img src="{{ page_user.profile_picture }}" class="card-img" alt="...">
+        {% else %}
+            <img src="{% static 'images/default_avatar.png' %} " class="card-img" alt="...">
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h5>
+        <p class="card-text">{{ page_user.user.profile.bio }}</p>
+          {%if page_user.website_url %}
+            <a href="{{ page_user.website_url }}"><small class="text-muted">Website |</small></a>
+          {% endif %}
+
+          {%if page_user.facebook_url %}
+            <a href="{{ page_user.facebook_url }}"><small class="text-muted">Facebook |</small></a>
+          {% endif %}
+
+          {%if page_user.instagram_url %}
+            <a href="{{ page_user.instagram_url }}"><small class="text-muted">Instagram |</small></a>
+          {% endif %}
+
+          {%if page_user.twitter_url %}
+            <a href="{{ page_user.twitter_url }}"><small class="text-muted">Twitter |</small></a>
+          {% endif %}
+           <p class="card-text"><small class="text-muted">Email address: {{ page_user.user.email }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div class="error"></div>
+
+
+{% endblock %}

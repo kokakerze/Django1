@@ -1,5 +1,5 @@
 include .env
-#export $(shell sed 's/=.//' .env)
+export $(shell sed 's/=.//' .env)
 MANAGE = python src/manage.py
 PROJECT_DIR = $(shell pwd)
 WSGI_PORT=8000
@@ -19,9 +19,15 @@ celerybeat-run:
 new-migrations:
 	$(MANAGE) makemigrations
 
+new-migrations-acc:
+	$(MANAGE) makemigrations account
+
 
 migrate:
 	$(MANAGE) migrate
+
+migrate-acc:
+	$(MANAGE) migrate account
 
 lint:
 	flake8 .
@@ -47,6 +53,12 @@ gunicorn-run:
 collect-static:
 	$(MANAGE) collectstatic
 
+fillposts:
+	$(MANAGE) fill_posts
+
+gen-category:
+	$(MANAGE) gen_books_cat
+
 test:
 	cd src && pytest --cov=main --cov-report=html --cov-fail-under=40
 	open static_content/coverage/index.html
@@ -63,7 +75,7 @@ dkr-bld:
 dkr-st:
 	docker container stop ssb
 
-dkr-up-dev: dkr-down
+dkr-up-dev:dkr-down
 	$(eval RUN_COMMAND=run)
 	docker-compose up -d --build
 	make copy-static
