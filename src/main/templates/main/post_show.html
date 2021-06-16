@@ -12,6 +12,7 @@
                           <a href="{%  url "post_update" post_id=pst.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                             {{ pst.content }}</a>
                     <br>
+
                                 <br>
                                 {% if request.user.is_authenticated %}
                                 <form action="{% url "post_delete"  pst.id  %}">
@@ -57,4 +58,5 @@
 
             </ul>
         </div>
+{#    <img src="{{ request.user.profile.profile_picture }}" width="100" height="100">#}
 {% endblock %}

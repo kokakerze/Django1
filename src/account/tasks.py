@@ -16,5 +16,5 @@ def send_activation_link_mail(user_id):
         msg,
         settings.DEFAULT_FROM_EMAIL,
         [user.email],
-        fail_silently=False
+        # fail_silently=False,
     )
