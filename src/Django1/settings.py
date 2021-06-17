@@ -171,7 +171,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 mimetypes.add_type("text/css", ".css", True)
-mimetypes.add_type("text/html", ".css", True)
+# mimetypes.add_type("text/html", ".css", True)
 
 STATIC_URL = '/static/'
 
@@ -180,7 +180,10 @@ STATICFILES_DIRS = [
 ]
 
 
+# RunServer
 # STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
+
+#Docker
 STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
 
 MEDIA_URL = '/media/'
