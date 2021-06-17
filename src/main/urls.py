@@ -28,7 +28,7 @@ urlpatterns = [
     path('authors/new/', views.authors_new, name='authors_new'),
     path('authors/<int:pk>/delete/', views.DeleteAuthorsView.as_view(), name='author_delete'),
     path('authors/all/', views.AuthorsListView.as_view(), name='authors_all'),
-    path('books/all/', views.books_all, name='books_all'),
+    path('books/all/', views.BookListView.as_view(), name='books_all'),
     path('category/all/', cache.cache_page(600)(views.category_all), name='category_all'),
 
 

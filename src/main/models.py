@@ -181,6 +181,10 @@ class Book(models.Model):
     author = models.ForeignKey("Author", on_delete=models.CASCADE, related_name="books")
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="books_cat")
 
+    def __str__(self):
+        """Set method of printing."""
+        return self.title
+
 
 class Category(models.Model):
     """Set category for books."""

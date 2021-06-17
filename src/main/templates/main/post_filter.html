@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load bootstrap4 %}
 
 {% block title %}Посты{% endblock %}
 {% block  content %}
@@ -7,6 +8,16 @@
     <div class="payload">
         <ul>
             <div class="mb-1">Количество постов: {{ cnt }}</div>
+
+            <form method="GET">
+                {% bootstrap_form filter.form %}
+                <button id="search-button" type="submit" class="btn btn-secondary" width="100">
+                    <i class="fas fa-search"></i>
+                </button>
+
+            </form>
+            <br>
+            <br>
             {% for post in post_list %}
                 <div class="list-group">
                     <a href="{% url "post_show" post_id=post.id %}"
@@ -47,11 +58,13 @@
                     {% if is_paginated %}
                         <ul class="pagination">
                             {% if page_obj.has_previous %}
-                                <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}{{ get_params }}">&laquo;</a></li>
+                                <li><a class="page-link"
+                                       href="?page={{ page_obj.previous_page_number }}{{ get_params }}">&laquo;</a>
+                                </li>
                             {% else %}
                                 <li class="page-item active">
-                                     <span class="sr-only">&laquo;</span></a>
-                                    </li>
+                                    <span class="sr-only">&laquo;</span></a>
+                                </li>
                             {% endif %}
                             {% for i in paginator.page_range %}
                                 {% if page_obj.number == i %}
@@ -63,11 +76,12 @@
                                 {% endif %}
                             {% endfor %}
                             {% if page_obj.has_next %}
-                                <li><a class="page-link" href="?page={{ page_obj.next_page_number }}{{ get_params }}">&raquo;</a></li>
+                                <li><a class="page-link" href="?page={{ page_obj.next_page_number }}{{ get_params }}">&raquo;</a>
+                                </li>
                             {% else %}
                                 <li class="page-item active">
-                                     <span class="sr-only">&raquo;</span></a>
-                                    </li>
+                                    <span class="sr-only">&raquo;</span></a>
+                                </li>
                             {% endif %}
                         </ul>
                     {% endif %}
