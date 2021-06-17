@@ -1,8 +1,7 @@
 """This file include serializers for api mode."""
 
-from rest_framework import serializers
-
 from main.models import Book, Post
+from rest_framework import serializers
 
 
 class PostSerializer(serializers.ModelSerializer):

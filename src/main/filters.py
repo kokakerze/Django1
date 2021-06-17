@@ -1,6 +1,5 @@
 """Filters for Search."""
 import django_filters
-
 from main.models import Book, Post
 
 

@@ -1,10 +1,9 @@
 """This is API View file."""
 
-from rest_framework import viewsets
-from rest_framework.pagination import PageNumberPagination
-
 from api.generics import BookSerializer, PostSerializer
 from main.models import Book, Post
+from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
 
 
 class PostAPIViewSet(viewsets.ModelViewSet):
