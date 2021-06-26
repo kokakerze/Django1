@@ -1,10 +1,11 @@
 """Account forms file."""
-from account.models import Avatar, User
-from account.tasks import send_activation_link_mail
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserChangeForm, UsernameField
 from django.db import transaction
 from django.utils.text import slugify
+
+from account.models import Avatar, User, Profile
+from account.tasks import send_activation_link_mail
 
 
 class UserRegisterForm(forms.ModelForm):
@@ -48,7 +49,7 @@ class UserRegisterForm(forms.ModelForm):
         instance.set_password(self.cleaned_data["password"])
         instance.save()
         """Making send mail not in view, cause in view User dont have id."""
-        send_activation_link_mail.apply_async(agrs=[instance.id], countdown=10)
+        send_activation_link_mail(instance.id)
         return instance
 
 
@@ -118,3 +119,24 @@ class ProfileForm(UserChangeForm):
         instance.user = self.request.user
         instance.save()
         return instance
+
+
+class ProfilePageForm(forms.ModelForm):
+    """Create Profile for User using Profile model."""
+
+    class Meta:
+        """Meta class for ProfilePageForm."""
+        model = Profile
+        fields = ('bio', 'profile_picture', 'website_url', 'facebook_url', 'instagram_url', 'twitter_url')
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            # 'profile_picture' : forms.TextInput(attrs={'class':'form-control'}),
+            'website_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'facebook_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'twitter_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
+
+        }
+
+    def delete_image(self):
+        pass

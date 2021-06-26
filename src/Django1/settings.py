@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'account',
     'main',
     'rest_framework',
+    'django_cleanup',
 
 
 ]
@@ -99,6 +100,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -206,6 +208,9 @@ if DEBUG:
     DEBUG_TOOLBAR_PATCH_SETTINGS = True
 
     INTERNAL_IPS = [socket.gethostbyname(socket.gethostname())[:-1] + '1']
+    DOMAIN = 'http://0.0.0.0:8001'
+else:
+    DOMAIN = 'http://0.0.0.0:1337'
 
 LOGIN_REDIRECT_URL = '/'
 REDIRECT_FIELD_NAME = '/'

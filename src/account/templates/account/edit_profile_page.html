@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block  content %}
+    {% if user.is_authenticated %}
+        {% if user.id == profile.user.id %}
+    <div class="select2-container"></div>
+        <h1>Изменить Профиль</h1>
+
+        <div class="error">
+        {{ form.errors }}
+        {{ errors }}
+        </div>
+
+        <div class="payload">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button class="btn btn-secondary">Обновить</button>
+            </form>
+        </div>
+
+
+    {% else %}
+        Тебе сюда нельзя и ты это знаешь)...
+    {% endif %}
+        Ты не можешь редактировать другого пользователя...сорян
+        {% else %}
+    {% endif %}
+{% endblock %}

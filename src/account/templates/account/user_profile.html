@@ -5,6 +5,7 @@
 
 {% block  content %}
 {% load static %}
+
     <div class="select2-container"></div>
         <h1>Личный кабинет - {{ page_user }}</h1>
     <div class="card mb-3" style="max-width: 540px;">
@@ -12,10 +13,11 @@
 
     <div class="col-md-4">
         {% if page_user.profile_picture %}
-            <img src="{{ page_user.profile_picture }}" alt="" width="150">
-            </div>
+            <img src="{{MEDIA_URL}}/{{ page_user.profile_picture }}" class = 'card-img' alt="">
+
+
         {% else %}
-            <img src="{% static 'images/default_avatar.png' %} " class="card-img" alt="...">
+            <img src="{% static 'images/default_avatar.png' %} " class = 'card-img' alt="..." >
         {% endif %}
     </div>
     <div class="col-md-8">
