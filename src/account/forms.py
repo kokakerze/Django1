@@ -1,11 +1,10 @@
 """Account forms file."""
+from account.models import Avatar, Profile, User
+from account.tasks import send_activation_link_mail
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserChangeForm, UsernameField
 from django.db import transaction
 from django.utils.text import slugify
-
-from account.models import Avatar, User, Profile
-from account.tasks import send_activation_link_mail
 
 
 class UserRegisterForm(forms.ModelForm):
@@ -126,6 +125,7 @@ class ProfilePageForm(forms.ModelForm):
 
     class Meta:
         """Meta class for ProfilePageForm."""
+
         model = Profile
         fields = ('bio', 'profile_picture', 'website_url', 'facebook_url', 'instagram_url', 'twitter_url')
         widgets = {
@@ -137,6 +137,3 @@ class ProfilePageForm(forms.ModelForm):
             'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
 
         }
-
-    def delete_image(self):
-        pass

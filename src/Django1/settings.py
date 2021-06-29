@@ -185,7 +185,7 @@ STATICFILES_DIRS = [
 # RunServer
 # STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
 
-#Docker
+# Docker
 STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
 
 MEDIA_URL = '/media/'
@@ -214,3 +214,10 @@ else:
 
 LOGIN_REDIRECT_URL = '/'
 REDIRECT_FIELD_NAME = '/'
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')

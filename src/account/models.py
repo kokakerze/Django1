@@ -50,5 +50,5 @@ class Profile(models.Model):
     def delete(self, **kwargs):
         """Delete in custom method for cache_page."""
         super().delete()
-        key = self.__class__.cache_key()
-        cache.delete(key)
+        # key = self.__class__.cache_key()
+        # cache.delete(key)
