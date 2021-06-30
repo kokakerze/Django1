@@ -114,7 +114,7 @@ class Post(models.Model):
 
     def __str__(self):
         """Set method of printing."""
-        return self.title
+        return f"{self.title} {self.description}"
 
     def save(self, **kwargs):
         """Save in custom method for cache_page."""
