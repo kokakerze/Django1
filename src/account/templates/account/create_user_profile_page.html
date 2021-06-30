@@ -1,0 +1,27 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block  content %}
+    {% if user.is_authenticated %}
+    <div class="select2-container"></div>
+        <h1>Создать Профиль</h1>
+
+        <div class="error">
+        {{ form.errors }}
+        {{ errors }}
+        </div>
+
+        <div class="payload">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button class="btn btn-dark">Создать</button>
+            </form>
+        </div>
+
+
+    {% endif %}
+{% endblock %}

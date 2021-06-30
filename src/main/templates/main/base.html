@@ -10,6 +10,11 @@
 
   <title>Super Space - Blog where we write what we want.</title>
 
+    <!-- Optional JavaScript -->
+{#<!-- jQuery first, then Popper.js, then Bootstrap JS -->#}
+{#<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>#}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>#}
   <!-- Bootstrap core CSS -->
   <link href="{%  static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
 
@@ -20,15 +25,19 @@
 
   <!-- Custom styles for this template -->
   <link href="{%  static "css/clean-blog.min.css"%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="{% url "homepage" %}">Super Space</a>
+        <a class="navbar-brand" href="{% url "homepage" %}">Super Space</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -38,18 +47,10 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url "homepage" %}">Главная</a>
           </li>
-{#          <li class="nav-item">#}
-{#            <a class="nav-link" href="{% url "about" %}">О нас</a>#}
-{#          </li>#}
           <li class="nav-item">
-            <a class="nav-link" href="{% url "posts_list" %}">Посты</a>
+            <a class="nav-link" href="{% url "about" %}">О нас</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "post_create" %}">Создать пост</a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{% url "subscribers_new" %}">Подписаться на автора</a>
-          </li>
+<<<<<<< HEAD
 {#            <li class="nav-item">#}
 {#            <a class="nav-link" href="{% url "authors_new" %}">Сгенерировать автора</a>#}
 {#          </li>#}
@@ -61,43 +62,92 @@
           </li>
 {#            <li class="nav-item">#}
 {#            <a class="nav-link" href="{% url "category_all" %}">Все категории</a>#}
+=======
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Посты
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url "posts_list" %}">Посты</a></li>
+                        <li><a class="dropdown-item" href="{% url "post_create" %}">Создать пост</a></li>
+                    </ul>
+                </li>
+{#          <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "posts_list" %}">Посты</a>#}
 {#          </li>#}
-            <li class="nav-item">
-            <a class="nav-link" href="{% url "contact-us-create" %}">Связаться с нами</a>
-          </li>
-            {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                <a class="nav-link" href="{% url "account:show_profile_page" request.user.id %}">Аккаунт</a>
-              </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{% url "account:change_password" %}">Сменить пароль</a>
-              </li>
-{#                </li>#}
-{#                <li class="nav-item">#}
-{#                <a class="nav-link" href="{% url "account:password_reset" %}">Восстановить пароль</a>#}
-{#              </li>#}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url "account:my_profile_ava_create" %}">Загрузить аватар</a>
+{#          <li class="nav-item">#}
+{#            <a class="nav-link" href="{% url "post_create" %}">Создать пост</a>#}
+>>>>>>> myprofilebranch
+{#          </li>#}
+                            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Авторы
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url "subscribers_new" %}">Подписаться на автора</a></li>
+                        <li><a class="dropdown-item" href="{% url "authors_new" %}">Сгенерировать автора</a></li>
+                        <li><a class="dropdown-item" href="{% url "authors_all" %}">Все авторы</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url "account:my_profile_ava_list" %}">Аватарки</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Книги
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url "books_all" %}">Все книги</a></li>
+                        <li><a class="dropdown-item" href="{% url "category_all" %}">Все категории</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{% url "account:logout" %}">Выход</a>
-              </li>
+
+
+                        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Скачать
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url "posts_list_csv" %}">Скачать посты в CSV </a></li>
+                        <li><a class="dropdown-item" href="{% url "posts_list_xls" %}">Скачать посты в XLS </a></li>
+                    </ul>
+                </li>
+                    <li class="nav-item">
+                <a class="nav-link" href="{% url "contact-us-create" %}">Связаться с нами</a>
+            </li>
+                        {% if request.user.is_authenticated %}
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Аккаунт
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if user.profile.id %}
+                            <li><a class="dropdown-item" href="{% url "account:show_profile_page" request.user.id %}">Мой
+                                Аккаунт</a ></li>
+                            <li><a class="dropdown-item" href="{% url "account:edit_profile_page" request.user.id %}">Изменить профиль</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url "account:create_profile_page" %}">Создать профиль</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url "account:my_profile" %}">Настройки</a></li>
+                        <li><a class="dropdown-item" href="{% url "account:change_password" %}">Сменить пароль</a></li>
+                        <li><a class="dropdown-item" href="{% url "account:password_reset" %}">Восстановить пароль</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url "account:my_profile_ava_create" %}">Загрузить
+                            аватар</a></li>
+                        <li><a class="dropdown-item" href="{% url "account:my_profile_ava_list" %}">Все Аватарки</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url "account:logout" %}">Выход</a></li>
+                    </ul>
+                </li>
             {% else %}
                 <li class="nav-item">
-                <a class="nav-link" href="{% url "account:signup" %}">Регистрация</a>
-              </li>
+                    <a class="nav-link" href="{% url "account:signup" %}">Регистрация</a>
+                </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{% url "account:login" %}">Вход</a>
-              </li>
+                    <a class="nav-link" href="{% url "account:login" %}">Вход</a>
+                </li>
             {% endif %}
-{#            <li class="nav-item">#}
-{#            <a class="nav-link" href="{% url "posts_list_csv" %}">Скачать посты в CSV </a>#}
-{#            <li class="nav-item">#}
-{#            <a class="nav-link" href="{% url "posts_list_xls" %}">Скачать посты в XLS </a>#}
-{#          </li>#}
         </ul>
       </div>
     </div>

@@ -1,0 +1,34 @@
+{% extends "main/base.html" %}
+
+{% block title %}Автора{% endblock %}
+{% block content %}
+    <div class="container"></div>
+    <h1>Авторы</h1>
+    <div class="payload">
+        <table class="table table-hover">
+ 
+            <thead>
+{#            <tr>#}
+{#                <th scope="col"><span>ID автора</span></th>#}
+{#                <th scope="col"><span>Email автора</span></th>#}
+{#                <th scope="col"><span>Количество книг</span></th>#}
+{#                <th scope="col"><span>Имя автора</span></th>#}
+{#            </tr>#}
+            </thead>
+            <tbody>
+{#            {% for author in author_list %}#}
+{#                <tr>#}
+{#                    <th scope="row"><span>{{ author.id }}</span></th>#}
+{#                    <th scope="row"><span>{{ author.email }}</span></th>#}
+{#                    <th scope="row"><span>{{ author.books.count }}</span></th>#}
+{#                    <th scope="row"><span>{{ author.name }}</span></th>#}
+{#                    {% if request.user.is_authenticated %}#}
+{#                        <th scope="row"><span><a href="{% url "author_delete" author.id %}">(Delete)</a></span></th>#}
+{#                    {% endif %}#}
+{#                </tr>#}
+{#            {% endfor %}#}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

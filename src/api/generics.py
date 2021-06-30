@@ -1,7 +1,8 @@
 """This file include serializers for api mode."""
 
-from main.models import Book, Post
 from rest_framework import serializers
+
+from main.models import Book, Post, Author
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -35,4 +36,20 @@ class BookSerializer(serializers.ModelSerializer):
             'title',
             'author',
             'category',
+        )
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    """Create serializers for Author model."""
+
+    class Meta:
+        """Class Meta for book  serializers."""
+
+        model = Author
+        fields = (
+            'id',
+            'name',
+            'last_name',
+            'email',
+            'age',
         )
