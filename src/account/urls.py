@@ -32,10 +32,7 @@ urlpatterns = [
     path('my_profile/ava/create/', views.AvaCreateView.as_view(), name='my_profile_ava_create'),
     path('my_profile/ava/list', views.AvaListView.as_view(), name='my_profile_ava_list'),
     path('<int:pk>/my_profile/', views.ShowProfilePageView.as_view(), name="show_profile_page"),
-<<<<<<< HEAD
-=======
     path('<int:pk>/edit_profile/', views.EditProfilePageView.as_view(), name="edit_profile_page"),
     path('create_profile/', views.CreateProfileView.as_view(), name="create_profile_page"),
 
->>>>>>> myprofilebranch
 ]

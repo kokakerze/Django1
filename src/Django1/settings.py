@@ -68,13 +68,9 @@ INSTALLED_APPS = [
     'account',
     'main',
     'rest_framework',
-<<<<<<< HEAD
     'django_tables2',
-    'django_filters'
-=======
+    'django_filters',
     'django_cleanup',
-
->>>>>>> myprofilebranch
 
 ]
 
