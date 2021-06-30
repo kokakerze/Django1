@@ -1,6 +1,5 @@
 """Manage information that shows in urls for account."""
-
-from account.forms import AvatarForm, ProfileForm, UserRegisterForm
+from account.forms import AvatarForm, ProfileForm, ProfilePageForm, UserRegisterForm
 from account.models import Avatar, Profile, User
 from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
@@ -39,8 +38,8 @@ class ShowProfilePageView(DetailView):
         return queryset.filter(user=self.request.user)
 
 
-class EditProfile(LoginRequiredMixin, UpdateView):
-    """Update profiles."""
+class Editsettings(LoginRequiredMixin, UpdateView):
+    """Update profile settings."""
 
     form_class = ProfileForm
     # queryset = User.objects.filter(is_active=True)
@@ -50,6 +49,28 @@ class EditProfile(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         """Get user from request."""
         return self.request.user
+
+
+class CreateProfileView(CreateView):
+    """Create Profile for user just created."""
+
+    model = Profile
+    form_class = ProfilePageForm
+    template_name = "account/create_user_profile_page.html"
+
+    def form_valid(self, form):
+        """Make user profile valuable to the form."""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class EditProfilePageView(LoginRequiredMixin, UpdateView):
+    """Edit profile page for user."""
+
+    model = Profile
+    template_name = "account/edit_profile_page.html"
+    fields = ['bio', 'profile_picture', 'website_url', 'facebook_url', 'instagram_url', 'twitter_url']
+    success_url = reverse_lazy("homepage")
 
 
 class SignUpView(CreateView):

@@ -108,6 +108,11 @@ copy-static:
 dkr-runserver-breakpoint:
 	docker exec -it ssb-backend $(MANAGE) runserver 0.0.0.0:9000
 
+dkr-clean:dkr-down
+	docker rm -f $(docker ps -a -q)
+	docker volume rm $(docker volume ls -q)
+	docker system prune -af
+
 urls:
 	$(MANAGE) show_urls
 

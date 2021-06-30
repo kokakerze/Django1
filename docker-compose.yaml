@@ -26,6 +26,9 @@ services:
     ports:
     - "8001:8000"
     - "9000:9000"
+    - "587:587"
+    expose:
+      - 587
     volumes:
       - ./:/srv/project
     depends_on:

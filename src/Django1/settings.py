@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'account',
     'main',
     'rest_framework',
+    'django_cleanup',
     'django_tables2',
     'django_filters'
 
@@ -106,6 +107,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -213,6 +215,16 @@ if DEBUG:
     DEBUG_TOOLBAR_PATCH_SETTINGS = True
 
     INTERNAL_IPS = [socket.gethostbyname(socket.gethostname())[:-1] + '1']
+    DOMAIN = 'http://0.0.0.0:8001'
+else:
+    DOMAIN = 'http://0.0.0.0:1337'
 
 LOGIN_REDIRECT_URL = '/'
 REDIRECT_FIELD_NAME = '/'
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')

@@ -3,6 +3,7 @@ import uuid
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -40,3 +41,14 @@ class Profile(models.Model):
     def __str__(self):
         """Return a string representation of user."""
         return str(self.user)
+
+    @staticmethod
+    def get_absolute_url():
+        """Set absolute link."""
+        return reverse('homepage')
+
+    def delete(self, **kwargs):
+        """Delete in custom method for cache_page."""
+        super().delete()
+        # key = self.__class__.cache_key()
+        # cache.delete(key)
