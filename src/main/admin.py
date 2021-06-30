@@ -14,11 +14,20 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ("subs_id", "body")
 
 
+class UserAdmin(admin.ModelAdmin):
+    """Makes User in admin view more accessible."""
+
+    # list_select_related = ("user_id", "user")
+    list_display = ("email", "first_name")
+    list_filter = ("is_active", "is_staff",)
+    readonly_fields = ("confirmation_token", "is_active", "date_joined", "last_login")
+
+
 admin.site.register(Author)
 admin.site.register(Post)
 admin.site.register(Subscriber)
 admin.site.register(Logger)
 admin.site.register(Comments, CommentAdmin)
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Avatar)
 admin.site.register(Profile)

@@ -90,7 +90,8 @@ class SignUpView(CreateView):
 class ActivateUserView(View):
     """Make User active after email confirmation."""
 
-    def get(self, request, confirmation_token):
+    @staticmethod
+    def get(request, confirmation_token):
         """Get User and make it active."""
         user = get_object_or_404(User, confirmation_token=confirmation_token)
         user.is_active = True
