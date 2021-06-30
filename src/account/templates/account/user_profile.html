@@ -11,8 +11,9 @@
   <div class="row no-gutters">
 
     <div class="col-md-4">
-        {% if page_user.profile_picture%}
-            <img src="{{ page_user.profile_picture }}" class="card-img" alt="...">
+        {% if page_user.profile_picture %}
+            <img src="{{ page_user.profile_picture }}" alt="" width="150">
+            </div>
         {% else %}
             <img src="{% static 'images/default_avatar.png' %} " class="card-img" alt="...">
         {% endif %}

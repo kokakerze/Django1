@@ -6,5 +6,6 @@ from . import views
 
 router = DefaultRouter()
 router.register(prefix='posts', viewset=views.PostAPIViewSet, basename='post')
+router.register(prefix='books', viewset=views.BooksAPIViewSet, basename='book')
 
 urlpatterns = router.urls

@@ -6,7 +6,9 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, View
+from django_filters.views import FilterView
 from faker import Faker
+from main.filters import BookFilter, PostFilter
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Book, Category, ContactUs, Post, Subscriber
 from main.services.notify_service import notify
@@ -107,12 +109,12 @@ def authors_new(request):
 #     return render(request, "main/authors_all.html", context)
 
 
-def books_all(request):
-    """Show a list of authors."""
-    # books = Book.objects.all().select_related("author")
-    books = Book.objects.all().only("id", "title", "author__last_name", "category").select_related("author")
-    context = {"title": "Книги", "books": books}
-    return render(request, "main/books_all.html", context)
+# def books_all(request):
+#     """Show a list of authors."""
+#     # books = Book.objects.all().select_related("author")
+#     books = Book.objects.all().only("id", "title", "author__last_name", "category").select_related("author")
+#     context = {"title": "Книги", "books": books}
+#     return render(request, "main/books_all.html", context)
 
 
 def category_all(request):
@@ -178,10 +180,32 @@ def api_subscribe(request):
     return JsonResponse(data, safe=False)
 
 
-class PostsListView(ListView):
+class BookListView(FilterView):
+    """Show list of books."""
+
+    paginate_by = 25
+    filterset_class = BookFilter
+
+    def get_queryset(self):
+        """Set queryset to listview."""
+        queryset = Book.objects.all().only("id", "title", "author__last_name", "category").select_related("author")
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        """Set context data for BookView."""
+        context = super().get_context_data(*args, **kwargs)
+        context["get_params"] = '&'.join(f"{key}={val}" for key, val in self.request.GET.items() if key != "page")
+        context["title"] = "Все книги"
+        return context
+
+
+# class PostsListView(ListView):
+class PostsListView(FilterView):
     """Show list of posts analogously."""
 
     # queryset = Post.objects.all()
+    paginate_by = 4
+    filterset_class = PostFilter
 
     def get_queryset(self):
         """Set queryset to listview."""
@@ -191,6 +215,7 @@ class PostsListView(ListView):
     def get_context_data(self, *args, **kwargs):
         """Set context data for ListView."""
         context = super().get_context_data(*args, **kwargs)
+        context["get_params"] = '&'.join(f"{key}={val}" for key, val in self.request.GET.items() if key != "page")
         context["cnt"] = context['object_list'].count()
         context["title"] = "Все посты"
         return context

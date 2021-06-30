@@ -83,7 +83,6 @@ dkr-up-dev:dkr-down
 dkr-up-prod: dkr-down
 	$(eval RUN_COMMAND=gunicorn-run)
 	docker-compose up -d --build
-	make docker collect-static
 	make copy-static
 
 dkr-down:
