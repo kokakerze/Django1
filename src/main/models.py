@@ -114,7 +114,7 @@ class Post(models.Model):
 
     def __str__(self):
         """Set method of printing."""
-        return self.title
+        return f"{self.title} {self.description}"
 
     def save(self, **kwargs):
         """Save in custom method for cache_page."""
@@ -180,6 +180,10 @@ class Book(models.Model):
     title = models.CharField("Название книги", max_length=250)
     author = models.ForeignKey("Author", on_delete=models.CASCADE, related_name="books")
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="books_cat")
+
+    def __str__(self):
+        """Set method of printing."""
+        return self.title
 
 
 class Category(models.Model):

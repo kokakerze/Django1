@@ -1,0 +1,68 @@
+{% extends "main/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block  content %}
+    <div class="container" style="color:black;"></div>
+    <h1>{{ title }}</h1>
+
+    <div class="payload">
+
+            <table class="table table-hover">
+
+                <thead>
+                <tr>
+                    <th scope="col"><span>ID книги</span></th>
+                    <th scope="col"><span>Название</span></th>
+                    <th scope="col"><span>Автор</span></th>
+                    <th scope="col"><span>Категория<</span>/th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in book_list %}
+                    <tr>
+                        <th scope="row"><span style="color: #808080; ">{{ book.id }}</span></th>
+                        <th scope="row"><span style="color: #808080; ">{{ book.title }}</span></th>
+                        <th scope="row"><span style="color: #808080; ">{{ book.author.name }}</span></th>
+                        <th scope="row"><span style="color: #808080; ">{{ book.category.category }}</span></th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    {% if is_paginated %}
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li><a class="page-link"
+                                       href="?page={{ page_obj.previous_page_number }}{{ get_params }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="page-item active">
+                                    <span class="sr-only">&laquo;</span>
+                                </li>
+                            {% endif %}
+                            {% for i in paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active">
+                                        <a class="page-link" href={{ i }}>{{ i }}<span class="sr-only">(current)</span></a>
+                                    </li>
+                                {% else %}
+                                    <li><a class="page-link" href="?page={{ i }}{{ get_params }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li><a class="page-link" href="?page={{ page_obj.next_page_number }}{{ get_params }}">&raquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item active">
+                                    <span class="sr-only">&raquo;</span>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

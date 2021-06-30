@@ -69,9 +69,15 @@ INSTALLED_APPS = [
     'main',
     'rest_framework',
     'django_cleanup',
-
+    'django_tables2',
+    'django_filters'
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,7 +98,8 @@ ROOT_URLCONF = 'Django1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
+        # 'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -172,7 +179,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/css", ".css")
 # mimetypes.add_type("text/html", ".css", True)
 
 STATIC_URL = '/static/'
