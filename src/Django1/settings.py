@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'account',
     'main',
     'rest_framework',
+    'django_cleanup',
     'django_tables2',
     'django_filters',
     'django_cleanup',
