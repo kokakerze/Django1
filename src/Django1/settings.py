@@ -70,7 +70,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_cleanup',
     'django_tables2',
-    'django_filters'
+    'django_filters',
+    'django_cleanup',
 
 ]
 

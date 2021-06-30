@@ -59,6 +59,16 @@
                         <li><a class="dropdown-item" href="{% url "post_create" %}">Создать пост</a></li>
                     </ul>
                 </li>
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Авторы
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url "subscribers_new" %}">Подписаться на автора</a></li>
+                        <li><a class="dropdown-item" href="{% url "authors_new" %}">Сгенерировать автора</a></li>
+                        <li><a class="dropdown-item" href="{% url "authors_all" %}">Все авторы</a></li>
+                    </ul>
+                </li>
 {#          <li class="nav-item">#}
 {#            <a class="nav-link" href="{% url "posts_list" %}">Посты</a>#}
 {#          </li>#}

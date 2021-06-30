@@ -264,7 +264,8 @@ class PostCSVView(View):
 class PostXLSView(View):
     """Download Posts in XLS format."""
 
-    def get(self, request, *args, **kwargs):
+    @staticmethod
+    def get(request, *args, **kwargs):
         """Download list of posts in CSV."""
         # Create the HttpResponse object with the appropriate CSV header.
         response = HttpResponse(
@@ -284,7 +285,7 @@ class PostXLSView(View):
         font_style = xlwt.XFStyle()
         data = Post.objects.all()
         for post in data:
-            row_num = row_num + 1
+            row_num += 1
             ws.write(row_num, 0, post.title, font_style)
             ws.write(row_num, 1, post.content, font_style)
             ws.write(row_num, 2, post.mood, font_style)
@@ -295,6 +296,23 @@ class PostXLSView(View):
 
 class AuthorsListView(ListView):
     """Show list of posts analogously."""
+
+    def get_queryset(self):
+        """Set queryset to listview."""
+        key = Author().__class__.cache_key()
+        if key in cache:
+            queryset = cache.get(key)
+        else:
+            queryset = Author.objects.all().prefetch_related("books")
+            cache.set(key, queryset, 60)
+        return queryset
+
+
+class AuthorsList2View(ListView):
+    """Show list of posts ."""
+
+    model = Author
+    template_name = 'main/author_list_js.html'
 
     def get_queryset(self):
         """Set queryset to listview."""
