@@ -1,7 +1,6 @@
 """ViewsFile that manages information that shows in urls."""
 import csv
 
-import xlwt
 from django.core.cache import cache
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -9,8 +8,6 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, View
 from django_filters.views import FilterView
 from faker import Faker
-from prompt_toolkit.validation import ValidationError
-
 from main.filters import BookFilter, PostFilter
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Book, Category, ContactUs, Post, Subscriber
@@ -18,6 +15,8 @@ from main.services.notify_service import notify
 from main.services.post_service import comment_method, post_find, postall
 from main.services.subscribe_service import subscribe
 from main.tasks import notify_async
+from prompt_toolkit.validation import ValidationError
+import xlwt
 
 
 def index(request):
