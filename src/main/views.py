@@ -314,15 +314,15 @@ class AuthorsList2View(ListView):
     model = Author
     template_name = 'main/author_list_js.html'
 
-    def get_queryset(self):
-        """Set queryset to listview."""
-        key = Author().__class__.cache_key()
-        if key in cache:
-            queryset = cache.get(key)
-        else:
-            queryset = Author.objects.all().prefetch_related("books")
-            cache.set(key, queryset, 60)
-        return queryset
+    # def get_queryset(self):
+    #     """Set queryset to listview."""
+    #     key = Author().__class__.cache_key()
+    #     if key in cache:
+    #         queryset = cache.get(key)
+    #     else:
+    #         queryset = Author.objects.all().prefetch_related("books")
+    #         cache.set(key, queryset, 60)
+    #     return queryset
 
 
 class DeletePostView(DeleteView):

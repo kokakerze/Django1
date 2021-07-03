@@ -12,9 +12,9 @@
 
     <!-- Optional JavaScript -->
 {#<!-- jQuery first, then Popper.js, then Bootstrap JS -->#}
-{#<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>#}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>#}
+{#  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>#}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+{#  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>#}
   <!-- Bootstrap core CSS -->
   <link href="{%  static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
 
@@ -107,7 +107,7 @@
                 </li>
 
 
-                        <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Скачать
                     </a>
@@ -118,32 +118,26 @@
                 </li>
                     <li class="nav-item">
                 <a class="nav-link" href="{% url "contact-us-create" %}">Связаться с нами</a>
-            </li>
-                        {% if request.user.is_authenticated %}
+                    </li>
 
+            {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Аккаунт
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% if user.profile.id %}
-                            <li><a class="dropdown-item" href="{% url "account:show_profile_page" request.user.id %}">Мой
-                                Аккаунт</a ></li>
+                            <li><a class="dropdown-item" href="{% url "account:show_profile_page" request.user.id %}">Мой Аккаунт</a ></li>
                             <li><a class="dropdown-item" href="{% url "account:edit_profile_page" request.user.id %}">Изменить профиль</a></li>
                         {% else %}
                             <li><a class="dropdown-item" href="{% url "account:create_profile_page" %}">Создать профиль</a></li>
                         {% endif %}
-                        <li><a class="dropdown-item" href="{% url "account:my_profile" %}">Настройки</a></li>
-                        <li><a class="dropdown-item" href="{% url "account:change_password" %}">Сменить пароль</a></li>
-                        <li><a class="dropdown-item" href="{% url "account:password_reset" %}">Восстановить пароль</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url "account:my_profile_ava_create" %}">Загрузить
-                            аватар</a></li>
-                        <li><a class="dropdown-item" href="{% url "account:my_profile_ava_list" %}">Все Аватарки</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
+                            <li><a class="dropdown-item" href="{% url "account:my_profile" %}">Настройки</a></li>
+                            <li><a class="dropdown-item" href="{% url "account:change_password" %}">Сменить пароль</a></li>
+                            <li><a class="dropdown-item" href="{% url "account:password_reset" %}">Восстановить пароль</a></li>
+                            <li><a class="dropdown-item" href="{% url "account:my_profile_ava_create" %}">Загрузить аватар</a></li>
+                            <li><a class="dropdown-item" href="{% url "account:my_profile_ava_list" %}">Все Аватарки</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url "account:logout" %}">Выход</a></li>
                     </ul>
                 </li>
@@ -231,6 +225,7 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="{%  static "vendor/jquery/jquery.min.js" %}"></script>
+  <script src="{%  static "js/author-list.js" %}"></script>
   <script src="{%  static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
 
   <!-- Custom scripts for this template -->
