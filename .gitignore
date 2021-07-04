@@ -151,3 +151,5 @@ src/tests/test_tasks.py
 src/tests/test_commands.py
 
 src/main/templates/main/main.html
+
+notes

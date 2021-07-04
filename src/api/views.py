@@ -12,6 +12,7 @@ class PostAPIViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('id')
     serializer_class = PostSerializer
     pagination_class = PageNumberPagination
+    pagination_class.page_size = 3
 
 
 class BooksAPIViewSet(viewsets.ModelViewSet):

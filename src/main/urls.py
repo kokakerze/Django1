@@ -34,6 +34,7 @@ urlpatterns = [
 
 
     path('api/v1/', include('api.urls')),
+    path('posts-page/', TemplateView.as_view(template_name='main/posts_page.html'), name='posts_page'),
 
     path('contact-us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
 
