@@ -1,5 +1,5 @@
 include .env
-export $(shell sed 's/=.//' .env)
+export $(shell sed 's/=.*//' .env)
 MANAGE = python src/manage.py
 PROJECT_DIR = $(shell pwd)
 WSGI_PORT=8000
