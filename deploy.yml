@@ -1,0 +1,8 @@
+---
+- name: "Config Nginx"
+  hosts: digitalocean
+  become: true
+
+  roles:
+    - { role: nginx_config_deploy, when: ansible_system == "Linux" }
+
