@@ -6,7 +6,7 @@ thesis in Hillel course Python Advanced, made by student Kertsman Kostiantyn.
 <h1>How it looks:</h1>
 
 Main page:
-<kbd>(https://github.com/kokakerze/Django1/blob/main/print_screens/SSB1.png?raw=true)</kbd>
+<kbd><img src="https://github.com/kokakerze/Django1/blob/main/print_screens/SSB1.png"/></kbd>
 
 Subscribe page:
 ![alt text](https://github.com/kokakerze/Django1/blob/main/print_screens/SSB2.png?raw=true)
