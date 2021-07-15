@@ -4,6 +4,7 @@ thesis in Hillel course Python Advanced, made by student Kertsman Kostiantyn.
 
 
 <h1>How it looks:</h1>
+
 Main page:
 ![alt text](https://github.com/kokakerze/Django1/blob/main/print_screens/SSB1.png?raw=true)
 
