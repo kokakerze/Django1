@@ -1,4 +1,4 @@
-#SSB - Super Space Blog
+# SSB - Super Space Blog
 SSB is the blog project that goes like 
 thesis in Hillel course Python Advanced, made by student Kertsman Kostiantyn.
 
