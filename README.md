@@ -9,10 +9,10 @@ Main page:
 <kbd><img src="https://github.com/kokakerze/Django1/blob/main/print_screens/SSB1.png"/></kbd>
 
 Subscribe page:
-![alt text](https://github.com/kokakerze/Django1/blob/main/print_screens/SSB2.png?raw=true)
+<kbd><img src="https://github.com/kokakerze/Django1/blob/main/print_screens/SSB2.png"/></kbd>
 
 Posts page:
-![alt text](https://github.com/kokakerze/Django1/blob/main/print_screens/SSB3.png?raw=true)
+<kbd><img src="https://github.com/kokakerze/Django1/blob/main/print_screens/SSB3.png"/></kbd>
 
 
 
