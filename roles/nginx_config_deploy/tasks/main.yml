@@ -1,0 +1,12 @@
+---
+-  name: "NginX default conf to server"
+   copy: src={{ item }} dest={{ dest_dir }}
+   with_fileglob:
+     - templates/default.j2
+
+
+
+
+
+
+

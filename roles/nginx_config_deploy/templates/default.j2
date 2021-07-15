@@ -1,0 +1,18 @@
+upstream django {
+	server {{ back_server_adress }}:{{ back_server_port }};
+}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name _;
+
+	location = /favicon.ico { access_log off; log_not_found off; }
+
+	location /static/ {
+		root {{ static_dir }};
+	}
+
+	location / {
+		proxy_pass http://django;
+	}
+}
